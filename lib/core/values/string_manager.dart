@@ -39,5 +39,6 @@ class StringManager {
   static const String specification6 =
       'Fashionable & Soft & Comfortable & Breathable';
   static const String specification7 = 'Machine/Hands washable';
+  static const String reviews = 'Reviews';
   // static const String forgotPassword = '';
 }

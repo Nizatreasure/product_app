@@ -12,7 +12,9 @@ import 'package:product_app/core/values/asset_manager.dart';
 import 'package:product_app/core/values/color_manager.dart';
 import 'package:product_app/core/values/fontsize_manager.dart';
 import 'package:product_app/core/values/string_manager.dart';
+import 'package:product_app/src/home/data/data_sources/local_data_source.dart';
 import 'package:product_app/src/home/presentation/blocs/product_details_bloc/product_detail_bloc.dart';
+import 'package:product_app/src/home/presentation/pages/product_review_widget.dart';
 
 part '../widgets/product_details_widgets.dart';
 
@@ -50,22 +52,55 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                     .add(ProductDetailGetDetailsEvent());
               })
             : state.formSubmissionStatus is SubmissionSuccess
-                ? Padding(
+                ? SingleChildScrollView(
                     padding: EdgeInsetsDirectional.symmetric(horizontal: 20.w),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(height: 20.h),
-                          _buildTitleAndCategory(themeData, state),
-                          SizedBox(height: 14.h),
-                          _buildImage(themeData, state),
-                          SizedBox(height: 20.h),
-                          _buildDescription(themeData, state),
-                          SizedBox(height: 15.h),
-                          _buildSpecification(themeData)
-                        ],
-                      ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: 20.h),
+                        _buildTitleAndCategory(themeData, state),
+                        SizedBox(height: 14.h),
+                        _buildImage(themeData, state),
+                        SizedBox(height: 20.h),
+                        _buildDescription(themeData, state),
+                        SizedBox(height: 15.h),
+                        _buildSpecification(themeData),
+                        SizedBox(height: 20.h),
+                        Container(
+                          margin: EdgeInsetsDirectional.only(bottom: 20.h),
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              15.w, 12.h, 15.w, 12.h),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.r),
+                            color: themeData.scaffoldBackgroundColor,
+                            boxShadow: [
+                              BoxShadow(
+                                color: ColorManager.black.withOpacity(0.1),
+                                spreadRadius: 0,
+                                blurRadius: 4,
+                                offset: const Offset(0, 0),
+                              )
+                            ],
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                StringManager.reviews,
+                                style: themeData.textTheme.bodyLarge!
+                                    .copyWith(fontSize: FontSizeManager.f12),
+                              ),
+                              SizedBox(height: 20.h),
+                              ...ProductLocalDateSource.comments
+                                  .map((e) => ProductReviewWidget(
+                                        comment: e,
+                                        showDivider: e.commenter != 'Zod',
+                                      ))
+                                  .toList(),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   )
                 : const CustomLoadingIndicator();
