@@ -7,9 +7,9 @@ class SignUpState {
   final bool showPassword;
 
   bool get isValid =>
-      name.trim().isNotEmpty &&
+      name.trim().length > 3 &&
       email.trim().isNotEmpty &&
-      password.trim().isNotEmpty &&
+      password.trim().length >= 5 &&
       EmailValidator.validate(email);
 
   final FormSubmissionStatus formSubmissionStatus;

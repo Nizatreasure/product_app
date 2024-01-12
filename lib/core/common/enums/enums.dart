@@ -21,4 +21,6 @@ enum DataStatus {
   weakPassword,
   userNotFound,
   wrongPassword,
+  invalidCredential,
+  tooManyRequests,
 }

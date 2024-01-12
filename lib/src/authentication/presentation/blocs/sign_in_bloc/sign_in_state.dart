@@ -7,7 +7,7 @@ class SignInState {
 
   bool get isValid =>
       email.trim().isNotEmpty &&
-      password.trim().isNotEmpty &&
+      password.trim().length >= 5 &&
       EmailValidator.validate(email);
 
   final FormSubmissionStatus formSubmissionStatus;

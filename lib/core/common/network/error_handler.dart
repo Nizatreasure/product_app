@@ -45,6 +45,10 @@ class ErrorHandler implements Exception {
         return DataStatus.wrongPassword.getFailure()!;
       case 'user-not-found':
         return DataStatus.userNotFound.getFailure()!;
+      case 'invalid-credential':
+        return DataStatus.invalidCredential.getFailure()!;
+      case 'too-many-requests':
+        return DataStatus.tooManyRequests.getFailure()!;
       default:
         return DataStatus.unknown.getFailure()!;
     }
@@ -193,6 +197,18 @@ extension DataStatusExtension on DataStatus {
           message: ResponseMessage.wrongPassword,
           data: data,
         );
+      case DataStatus.invalidCredential:
+        return DataFailure(
+          statusCode: ResponseCode.invalidCredential,
+          message: ResponseMessage.invalidCredential,
+          data: data,
+        );
+      case DataStatus.tooManyRequests:
+        return DataFailure(
+          statusCode: ResponseCode.tooManyRequests,
+          message: ResponseMessage.tooManyRequests,
+          data: data,
+        );
 
       default:
         return DataFailure(
@@ -229,6 +245,8 @@ class ResponseCode {
   static const int weakPassword = -12;
   static const int userNotFound = -13;
   static const int wrongPassword = -14;
+  static const int invalidCredential = -15;
+  static const int tooManyRequests = -16;
 }
 
 class ResponseMessage {
@@ -258,4 +276,7 @@ class ResponseMessage {
   static const String weakPassword = 'Password too weak';
   static const String userNotFound = 'No account found for provided email';
   static const String wrongPassword = 'Password too weak';
+  static const String invalidCredential = 'Email or password is invalid';
+  static const String tooManyRequests =
+      'Too many requests. Try again after some time';
 }
