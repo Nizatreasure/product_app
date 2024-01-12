@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "838965498012",
+    "project_id": "product-app-48a7f",
+    "storage_bucket": "product-app-48a7f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:838965498012:android:00c98a8553699d4d875d59",
+        "android_client_info": {
+          "package_name": "com.tezda.product_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDR0a2JZbzNdjF4dl0zarR7ZRE6CCRawvo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
