@@ -4,6 +4,7 @@ import 'package:product_app/core/routes/route_names.dart';
 import 'package:product_app/main.dart';
 import 'package:product_app/src/authentication/presentation/pages/sign_in_page.dart';
 import 'package:product_app/src/authentication/presentation/pages/sign_up_page.dart';
+import 'package:product_app/src/landing/presentation/pages/landing_page.dart';
 
 class MyAppRouter {
   static GoRouter router = GoRouter(
@@ -29,6 +30,13 @@ class MyAppRouter {
         path: RouteNames.signIn,
         pageBuilder: (context, state) {
           return const MaterialPage(child: SignInPage());
+        },
+      ),
+      GoRoute(
+        name: RouteNames.landing,
+        path: RouteNames.landing,
+        pageBuilder: (context, state) {
+          return const MaterialPage(child: LandingPage());
         },
       ),
     ],

@@ -79,7 +79,11 @@ class _SignInPageState extends State<SignInPage> {
     return BlocBuilder<SignInBloc, SignInState>(builder: (_, state) {
       return CustomButton(
         text: StringManager.signIn,
-        onTap: state.isValid ? () {} : null,
+        onTap: state.isValid
+            ? () {
+                context.goNamed(RouteNames.landing);
+              }
+            : null,
       );
     });
   }

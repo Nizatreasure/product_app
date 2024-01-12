@@ -6,4 +6,9 @@ class AppAssetManager {
   //svg
   static const String eyeOpen = '$_svgPath/eye-open.svg';
   static const String eyeHide = '$_svgPath/eye-hide.svg';
+  static const String order = '$_svgPath/order.svg';
+  static const String home = '$_svgPath/home.svg';
+  static const String account = '$_svgPath/account.svg';
+  static const String favourite = '$_svgPath/favourite.svg';
+  static const String favouriteFill = '$_svgPath/favourite-fill.svg';
 }

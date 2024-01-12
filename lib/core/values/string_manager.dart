@@ -12,4 +12,12 @@ class StringManager {
   static const String noAccount = 'Don\'t have an account?';
   static const String signInText = 'Welcome back. Sign in to continue';
   static const String forgotPassword = 'Forgot password';
+  static const String home = 'Home';
+  static const String order = 'Order';
+  static const String account = 'Account';
+  static const String favourites = 'Favourites';
+  // static const String forgotPassword = '';
+  // static const String forgotPassword = '';
+  // static const String forgotPassword = '';
+  // static const String forgotPassword = '';
 }

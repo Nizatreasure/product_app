@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:product_app/src/landing/presentation/blocs/landing_bloc.dart';
 
 import 'src/authentication/presentation/blocs/sign_in_bloc/sign_in_bloc.dart';
 import 'src/authentication/presentation/blocs/sign_up_bloc/sign_up_bloc.dart';
@@ -12,7 +13,7 @@ Future<void> initializaDependencies() async {
   //blocs
   getIt.registerFactory<SignUpBloc>(() => SignUpBloc());
   getIt.registerFactory<SignInBloc>(() => SignInBloc());
-  // getIt.registerFactory<OnboardingBloc>(() => OnboardingBloc());
+  getIt.registerFactory<LandingBloc>(() => LandingBloc());
   // getIt.registerFactory<SignInBloc>(() => SignInBloc());
   // getIt.registerFactory<EmailVerificationBloc>(() => EmailVerificationBloc());
   // getIt.registerFactory<CreatePinBloc>(() => CreatePinBloc());
