@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:product_app/blocs.dart';
 import 'package:product_app/globals.dart';
 
 import 'core/routes/app_router.dart';
@@ -40,14 +42,17 @@ class _MyAppState extends State<MyApp> {
           onTap: () {
             FocusManager.instance.primaryFocus?.unfocus();
           },
-          child: MaterialApp.router(
-            debugShowCheckedModeBanner: false,
-            title: 'Product App',
-            routeInformationParser: MyAppRouter.router.routeInformationParser,
-            routerDelegate: MyAppRouter.router.routerDelegate,
-            routeInformationProvider:
-                MyAppRouter.router.routeInformationProvider,
-            theme: ThemeManager.getLightTheme(),
+          child: MultiBlocProvider(
+            providers: AppBlocs.blocs,
+            child: MaterialApp.router(
+              debugShowCheckedModeBanner: false,
+              title: 'Product App',
+              routeInformationParser: MyAppRouter.router.routeInformationParser,
+              routerDelegate: MyAppRouter.router.routerDelegate,
+              routeInformationProvider:
+                  MyAppRouter.router.routeInformationProvider,
+              theme: ThemeManager.getLightTheme(),
+            ),
           ),
         );
       },

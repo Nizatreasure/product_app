@@ -1,4 +1,4 @@
-class Product {
+class ProductModel {
   final int id;
   final String title;
   final double price;
@@ -7,7 +7,7 @@ class Product {
   final String image;
   final Rating rating;
 
-  Product({
+  ProductModel({
     required this.id,
     required this.title,
     required this.price,
@@ -17,8 +17,8 @@ class Product {
     required this.rating,
   });
 
-  factory Product.fromJson(Map<String, dynamic> json) {
-    return Product(
+  factory ProductModel.fromJson(Map<String, dynamic> json) {
+    return ProductModel(
       id: int.tryParse(json['id'].toString()) ?? 0,
       title: json['title'] ?? '',
       price: double.tryParse(json['price'].toString()) ?? 0.0,
