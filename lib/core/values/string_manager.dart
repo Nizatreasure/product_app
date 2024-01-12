@@ -25,5 +25,6 @@ class StringManager {
   static const String successful = 'Successful';
   static const String signUpSuccessful = 'Your sign up was successful';
   static const String continue_ = 'Continue';
+  static const String retry = 'Retry';
   // static const String forgotPassword = '';
 }

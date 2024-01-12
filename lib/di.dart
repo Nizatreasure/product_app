@@ -5,6 +5,7 @@ import 'package:product_app/src/authentication/domain/usecases/sign_in_usecase.d
 import 'package:product_app/src/home/data/data_sources/remote_data_sources.dart';
 import 'package:product_app/src/home/domain/usecases/product_list_usecase.dart';
 import 'package:product_app/src/home/domain/usecases/single_product_usecase.dart';
+import 'package:product_app/src/home/presentation/blocs/product_details_bloc/product_detail_bloc.dart';
 import 'package:product_app/src/home/presentation/blocs/product_list_bloc/product_list_bloc.dart';
 import 'package:product_app/src/landing/presentation/blocs/landing_bloc.dart';
 
@@ -58,7 +59,7 @@ Future<void> initializaDependencies() async {
   getIt.registerFactory<SignInBloc>(() => SignInBloc(getIt()));
   getIt.registerFactory<LandingBloc>(() => LandingBloc());
   getIt.registerFactory<ProductListBloc>(() => ProductListBloc(getIt()));
-  // getIt.registerFactory<EmailVerificationBloc>(() => EmailVerificationBloc());
+  getIt.registerFactory<ProductDetailBloc>(() => ProductDetailBloc(getIt()));
   // getIt.registerFactory<CreatePinBloc>(() => CreatePinBloc());
   // getIt.registerFactory<KycVerificationBloc>(() => KycVerificationBloc());
   // getIt.registerFactory<EnterEmailBloc>(() => EnterEmailBloc());

@@ -1,6 +1,6 @@
 part of '../pages/product_details_page.dart';
 
-Widget _buildImage(ThemeData themeData) {
+Widget _buildImage(ThemeData themeData, ProductDetailState state) {
   return Stack(
     children: [
       Container(
@@ -11,9 +11,20 @@ Widget _buildImage(ThemeData themeData) {
           borderRadius: BorderRadius.circular(20.r),
         ),
         child: CachedNetworkImage(
-          imageUrl: 'imageUrl',
+          imageUrl: state.productDetails!.image,
           placeholder: (context, url) {
-            return Container(color: ColorManager.tintOrange);
+            return Container(
+              color: ColorManager.tintOrange.withOpacity(0.5),
+              alignment: Alignment.center,
+              child: SizedBox(
+                height: 50,
+                width: 50,
+                child: CircularProgressIndicator(
+                  color: themeData.canvasColor,
+                  strokeWidth: 2.5.r,
+                ),
+              ),
+            );
           },
           errorWidget: (context, url, error) {
             return Container(color: ColorManager.tintOrange);
@@ -39,7 +50,7 @@ Widget _buildImage(ThemeData themeData) {
   );
 }
 
-Widget _buildDescription(ThemeData themeData) {
+Widget _buildDescription(ThemeData themeData, ProductDetailState state) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -54,11 +65,10 @@ Widget _buildDescription(ThemeData themeData) {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                SvgPicture.asset(AppAssetManager.star,
-                    width: 18.r, height: 18.r),
+                _buildRating(state.productDetails!.rating.rate),
                 SizedBox(width: 7.w),
                 Text(
-                  '3.9 (200 ratings)',
+                  '${state.productDetails!.rating.rate} (${state.productDetails!.rating.count} ratings)',
                   style: themeData.textTheme.bodyMedium!,
                 )
               ],
@@ -68,9 +78,25 @@ Widget _buildDescription(ThemeData themeData) {
       ),
       SizedBox(height: 6.h),
       Text(
-        'Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday',
+        state.productDetails!.description,
         style: themeData.textTheme.bodyMedium,
       ),
     ],
+  );
+}
+
+Widget _buildRating(double rating) {
+  return rw.RatingBar(
+    itemSize: 15.r,
+    initialRating: rating,
+    allowHalfRating: true,
+    itemCount: 5,
+    ratingWidget: rw.RatingWidget(
+      full: SvgPicture.asset(AppAssetManager.starFill),
+      half: SvgPicture.asset(AppAssetManager.starHalf),
+      empty: SvgPicture.asset(AppAssetManager.starEmpty),
+    ),
+    ignoreGestures: true,
+    onRatingUpdate: (rating) {},
   );
 }

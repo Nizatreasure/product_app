@@ -11,4 +11,8 @@ class AppAssetManager {
   static const String favourite = '$_svgPath/favourite.svg';
   static const String star = '$_svgPath/star.svg';
   static const String favouriteFill = '$_svgPath/favourite-fill.svg';
+  static const String error = '$_svgPath/error.svg';
+  static const String starFill = '$_svgPath/star-fill.svg';
+  static const String starEmpty = '$_svgPath/star-empty.svg';
+  static const String starHalf = '$_svgPath/star-half.svg';
 }
