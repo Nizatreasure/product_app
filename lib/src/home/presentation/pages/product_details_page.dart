@@ -57,21 +57,13 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(height: 20.h),
-                          Text(
-                            state.productDetails!.title,
-                            style: themeData.textTheme.bodyMedium!
-                                .copyWith(fontWeight: FontWeight.w600),
-                          ),
-                          Text(
-                            state.productDetails!.category.toUpperCase(),
-                            style: themeData.textTheme.bodyMedium!
-                                .copyWith(color: themeData.disabledColor),
-                          ),
+                          _buildTitleAndCategory(themeData, state),
                           SizedBox(height: 14.h),
                           _buildImage(themeData, state),
                           SizedBox(height: 20.h),
                           _buildDescription(themeData, state),
-                          SizedBox(height: 3.h),
+                          SizedBox(height: 15.h),
+                          _buildSpecification(themeData)
                         ],
                       ),
                     ),

@@ -1,52 +1,33 @@
 part of '../pages/product_details_page.dart';
 
 Widget _buildImage(ThemeData themeData, ProductDetailState state) {
-  return Stack(
-    children: [
-      Container(
-        height: 193.h,
-        width: double.infinity,
-        clipBehavior: Clip.antiAlias,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20.r),
-        ),
-        child: CachedNetworkImage(
-          imageUrl: state.productDetails!.image,
-          placeholder: (context, url) {
-            return Container(
-              color: ColorManager.tintOrange.withOpacity(0.5),
-              alignment: Alignment.center,
-              child: SizedBox(
-                height: 50,
-                width: 50,
-                child: CircularProgressIndicator(
-                  color: themeData.canvasColor,
-                  strokeWidth: 2.5.r,
-                ),
-              ),
-            );
-          },
-          errorWidget: (context, url, error) {
-            return Container(color: ColorManager.tintOrange);
-          },
-        ),
-      ),
-      PositionedDirectional(
-        end: 3.r,
-        top: 4.r,
-        child: CircleAvatar(
-          radius: 17,
-          backgroundColor: themeData.scaffoldBackgroundColor,
-          child: SvgPicture.asset(
-            AppAssetManager.favourite,
-            width: 22.r,
-            height: 22.r,
-            colorFilter:
-                ColorFilter.mode(themeData.canvasColor, BlendMode.srcIn),
+  return Container(
+    height: 193.h,
+    width: double.infinity,
+    clipBehavior: Clip.antiAlias,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(20.r),
+    ),
+    child: CachedNetworkImage(
+      imageUrl: state.productDetails!.image,
+      placeholder: (context, url) {
+        return Container(
+          color: ColorManager.tintOrange.withOpacity(0.5),
+          alignment: Alignment.center,
+          child: SizedBox(
+            height: 50,
+            width: 50,
+            child: CircularProgressIndicator(
+              color: themeData.canvasColor,
+              strokeWidth: 2.5.r,
+            ),
           ),
-        ),
-      )
-    ],
+        );
+      },
+      errorWidget: (context, url, error) {
+        return Container(color: ColorManager.tintOrange);
+      },
+    ),
   );
 }
 
@@ -98,5 +79,62 @@ Widget _buildRating(double rating) {
     ),
     ignoreGestures: true,
     onRatingUpdate: (rating) {},
+  );
+}
+
+Widget _buildSpecification(ThemeData themeData) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        '${StringManager.specifications}:',
+        style: themeData.textTheme.bodyLarge!
+            .copyWith(fontSize: FontSizeManager.f12),
+      ),
+      SizedBox(height: 6.h),
+      _specificationText(StringManager.specification1, themeData),
+      _specificationText(StringManager.specification2, themeData),
+      _specificationText(StringManager.specification3, themeData),
+      _specificationText(StringManager.specification4, themeData),
+      _specificationText(StringManager.specification5, themeData),
+      _specificationText(StringManager.specification6, themeData),
+      _specificationText(StringManager.specification7, themeData),
+    ],
+  );
+}
+
+_specificationText(String text, ThemeData themeData) {
+  return Text('• $text', style: themeData.textTheme.bodyMedium);
+}
+
+Widget _buildTitleAndCategory(ThemeData themeData, ProductDetailState state) {
+  return Row(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              state.productDetails!.title,
+              style: themeData.textTheme.bodyMedium!
+                  .copyWith(fontWeight: FontWeight.w600),
+            ),
+            Text(
+              state.productDetails!.category.toUpperCase(),
+              style: themeData.textTheme.bodyMedium!
+                  .copyWith(color: themeData.disabledColor),
+            ),
+          ],
+        ),
+      ),
+      SizedBox(width: 10.w),
+      SvgPicture.asset(
+        AppAssetManager.favourite,
+        width: 22.r,
+        height: 22.r,
+        colorFilter: ColorFilter.mode(themeData.canvasColor, BlendMode.srcIn),
+      )
+    ],
   );
 }

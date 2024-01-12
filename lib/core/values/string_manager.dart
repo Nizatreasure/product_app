@@ -26,5 +26,18 @@ class StringManager {
   static const String signUpSuccessful = 'Your sign up was successful';
   static const String continue_ = 'Continue';
   static const String retry = 'Retry';
+  static const String specifications = 'Specifications';
+  static const String specification1 =
+      'About Size：China Size Smaller Than UK/US Size,Please View SizeChart';
+  static const String specification2 =
+      'Suggest Choosing 1-2 Bigger Size If You are Standard US/UK Size';
+  static const String specification3 =
+      'Style : Your Own Style & Fashion Style & Casual Style';
+  static const String specification4 =
+      'High quality lightweight cotton poly blen fabric';
+  static const String specification5 = 'Main Material : Cotton';
+  static const String specification6 =
+      'Fashionable & Soft & Comfortable & Breathable';
+  static const String specification7 = 'Machine/Hands washable';
   // static const String forgotPassword = '';
 }
