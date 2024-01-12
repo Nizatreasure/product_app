@@ -1,5 +1,8 @@
 import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:product_app/core/common/widgets/custom_loader.dart';
+import 'package:product_app/src/authentication/domain/usecases/sign_up_usecase.dart';
 
 import '../../../../../core/common/form_submission/form_submission.dart';
 
@@ -7,10 +10,8 @@ part 'sign_up_events.dart';
 part 'sign_up_state.dart';
 
 class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
-  // final SignUpUseCase _signUpUseCase;
-  // final LoginWithProviderUseCase _loginWithProviderUseCase;
-  // SignUpBloc(this._signUpUseCase, this._loginWithProviderUseCase)
-  SignUpBloc() : super(const SignUpState()) {
+  final SignUpUseCase _signUpUseCase;
+  SignUpBloc(this._signUpUseCase) : super(const SignUpState()) {
     on<SignUpNameChangedEvent>(_nameChangedEventHandler);
     on<SignUpEmailChangedEvent>(_emailChangedEventHandler);
     on<SignUpPasswordChangedEvent>(_passwordChangedEventHandler);
@@ -52,24 +53,20 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       formSubmissionStatus: SubmittingForm(),
       showPassword: false,
     ));
-    // CustomLoader.showLoader();
-    // final dataState = await _signUpUseCase.execute(params: {
-    //   'email': state.email,
-    //   'password': state.password,
-    //   'first_name': state.firstName,
-    //   'last_name': state.lastName,
-    //   'phone_number': state.phoneNumber,
-    //   'password_confirmation': state.password,
-    // });
-    // CustomLoader.dismissLoader();
-    // if (dataState.isRight) {
-    //   emit(state.copyWith(
-    //       formSubmissionStatus:
-    //           SubmissionSuccess<AuthEntity>(dataState.right)));
-    // } else {
-    //   emit(state.copyWith(
-    //       formSubmissionStatus: SubmissionFailure(dataState.left)));
-    // }
+    CustomLoader.showLoader();
+    final dataState = await _signUpUseCase.execute(params: {
+      'email': state.email,
+      'password': state.password,
+    });
+    CustomLoader.dismissLoader();
+    if (dataState.isRight) {
+      emit(state.copyWith(
+          formSubmissionStatus:
+              SubmissionSuccess<UserCredential>(dataState.right)));
+    } else {
+      emit(state.copyWith(
+          formSubmissionStatus: SubmissionFailure(dataState.left)));
+    }
     emit(state.copyWith(formSubmissionStatus: const InitialFormStatus()));
   }
 }

@@ -4,7 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:product_app/core/common/form_submission/form_submission.dart';
 import 'package:product_app/core/common/widgets/custom_button.dart';
+import 'package:product_app/core/common/widgets/custom_dialog.dart';
 import 'package:product_app/core/common/widgets/custom_password_field.dart';
 import 'package:product_app/core/common/widgets/custom_text_input_field.dart';
 import 'package:product_app/core/routes/route_names.dart';
@@ -36,7 +38,31 @@ class _SignUpPageState extends State<SignUpPage> {
         body: SafeArea(
           bottom: false,
           child: Builder(builder: (context) {
-            return _buildBody(themeData, context);
+            return BlocListener<SignUpBloc, SignUpState>(
+                listener: (context, state) async {
+                  if (state.formSubmissionStatus is SubmissionFailure) {
+                    showCustomDialog(
+                      context,
+                      title: StringManager.error,
+                      confirmButtonText: StringManager.close,
+                      body: (state.formSubmissionStatus as SubmissionFailure)
+                          .exception
+                          .message!,
+                    );
+                  } else if (state.formSubmissionStatus is SubmissionSuccess) {
+                    await showCustomDialog(
+                      context,
+                      title: StringManager.successful,
+                      body: StringManager.signUpSuccessful,
+                      confirmButtonText: StringManager.continue_,
+                      canPop: false,
+                    );
+                    if (context.mounted) {
+                      context.pushNamed(RouteNames.landing);
+                    }
+                  }
+                },
+                child: _buildBody(themeData, context));
           }),
         ),
       ),
@@ -82,7 +108,11 @@ class _SignUpPageState extends State<SignUpPage> {
     return BlocBuilder<SignUpBloc, SignUpState>(builder: (_, state) {
       return CustomButton(
         text: StringManager.signUp,
-        onTap: state.isValid ? () {} : null,
+        onTap: state.isValid
+            ? () {
+                context.read<SignUpBloc>().add(SignUpSubmittedEvent());
+              }
+            : null,
       );
     });
   }

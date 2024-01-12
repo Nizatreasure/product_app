@@ -1,5 +1,8 @@
 import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:product_app/core/common/widgets/custom_loader.dart';
+import 'package:product_app/src/authentication/domain/usecases/sign_in_usecase.dart';
 
 import '../../../../../core/common/form_submission/form_submission.dart';
 
@@ -7,10 +10,9 @@ part 'sign_in_events.dart';
 part 'sign_in_state.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
-  // final SignInUseCase _signInUseCase;
-  // final LoginWithProviderUseCase _loginWithProviderUseCase;
-  // SignInBloc(this._signInUseCase, this._loginWithProviderUseCase)
-  SignInBloc() : super(const SignInState()) {
+  final SignInUseCase _signInUseCase;
+
+  SignInBloc(this._signInUseCase) : super(const SignInState()) {
     on<SignInEmailChangedEvent>(_emailChangedEventHandler);
     on<SignInPasswordChangedEvent>(_passwordChangedEventHandler);
     on<SignInTogglePasswordVisibility>(_passwordVisibilityChangedEventHandler);
@@ -45,24 +47,20 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       formSubmissionStatus: SubmittingForm(),
       showPassword: false,
     ));
-    // CustomLoader.showLoader();
-    // final dataState = await _signInUseCase.execute(params: {
-    //   'email': state.email,
-    //   'password': state.password,
-    //   'first_name': state.firstName,
-    //   'last_name': state.lastName,
-    //   'phone_number': state.phoneNumber,
-    //   'password_confirmation': state.password,
-    // });
-    // CustomLoader.dismissLoader();
-    // if (dataState.isRight) {
-    //   emit(state.copyWith(
-    //       formSubmissionStatus:
-    //           SubmissionSuccess<AuthEntity>(dataState.right)));
-    // } else {
-    //   emit(state.copyWith(
-    //       formSubmissionStatus: SubmissionFailure(dataState.left)));
-    // }
+    CustomLoader.showLoader();
+    final dataState = await _signInUseCase.execute(params: {
+      'email': state.email,
+      'password': state.password,
+    });
+    CustomLoader.dismissLoader();
+    if (dataState.isRight) {
+      emit(state.copyWith(
+          formSubmissionStatus:
+              SubmissionSuccess<UserCredential>(dataState.right)));
+    } else {
+      emit(state.copyWith(
+          formSubmissionStatus: SubmissionFailure(dataState.left)));
+    }
     emit(state.copyWith(formSubmissionStatus: const InitialFormStatus()));
   }
 }

@@ -19,5 +19,11 @@ class StringManager {
   static const String products = 'Products';
   static const String productDetails = 'Product Details';
   static const String description = 'Description';
+  static const String cancel = 'Cancel';
+  static const String error = 'Error';
+  static const String close = 'Close';
+  static const String successful = 'Successful';
+  static const String signUpSuccessful = 'Your sign up was successful';
+  static const String continue_ = 'Continue';
   // static const String forgotPassword = '';
 }

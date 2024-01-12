@@ -1,10 +1,12 @@
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:product_app/src/authentication/domain/usecases/sign_in_usecase.dart';
 import 'package:product_app/src/landing/presentation/blocs/landing_bloc.dart';
 
 import 'core/common/network/connection_checker.dart';
 import 'core/services/network_request_service.dart';
 import 'src/authentication/data/repositories/auth_repository_impl.dart';
+import 'src/authentication/domain/usecases/sign_up_usecase.dart';
 import 'src/authentication/presentation/blocs/sign_in_bloc/sign_in_bloc.dart';
 import 'src/authentication/presentation/blocs/sign_up_bloc/sign_up_bloc.dart';
 
@@ -22,9 +24,13 @@ Future<void> initializaDependencies() async {
   getIt.registerSingleton<AuthenticationRepository>(
       AuthenticationRepositoryImpl(getIt()));
 
+  //usecase
+  getIt.registerSingleton<SignInUseCase>(SignInUseCase(getIt()));
+  getIt.registerSingleton<SignUpUseCase>(SignUpUseCase(getIt()));
+
   //blocs
-  getIt.registerFactory<SignUpBloc>(() => SignUpBloc());
-  getIt.registerFactory<SignInBloc>(() => SignInBloc());
+  getIt.registerFactory<SignUpBloc>(() => SignUpBloc(getIt()));
+  getIt.registerFactory<SignInBloc>(() => SignInBloc(getIt()));
   getIt.registerFactory<LandingBloc>(() => LandingBloc());
   // getIt.registerFactory<SignInBloc>(() => SignInBloc());
   // getIt.registerFactory<EmailVerificationBloc>(() => EmailVerificationBloc());

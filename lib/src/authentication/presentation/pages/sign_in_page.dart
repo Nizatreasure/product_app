@@ -80,8 +80,8 @@ class _SignInPageState extends State<SignInPage> {
       return CustomButton(
         text: StringManager.signIn,
         onTap: state.isValid
-            ? () {
-                context.goNamed(RouteNames.landing);
+            ? () async {
+                context.read<SignInBloc>().add(SignInSubmittedEvent());
               }
             : null,
       );
