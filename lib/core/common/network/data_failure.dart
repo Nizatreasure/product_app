@@ -1,3 +1,10 @@
+import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+import '../enums/enums.dart';
+
+part 'error_handler.dart';
+
 class DataFailure {
   int? statusCode;
   String? message;

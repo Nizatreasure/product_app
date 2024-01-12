@@ -1,6 +1,10 @@
 import 'package:get_it/get_it.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:product_app/src/landing/presentation/blocs/landing_bloc.dart';
 
+import 'core/common/network/connection_checker.dart';
+import 'core/services/network_request_service.dart';
+import 'src/authentication/data/repositories/auth_repository_impl.dart';
 import 'src/authentication/presentation/blocs/sign_in_bloc/sign_in_bloc.dart';
 import 'src/authentication/presentation/blocs/sign_up_bloc/sign_up_bloc.dart';
 
@@ -8,7 +12,15 @@ final getIt = GetIt.instance;
 
 Future<void> initializaDependencies() async {
   //services
-  // getIt.registerSingleton<TimerService>(const TimerService());
+  getIt.registerSingleton<InternetConnectionChecker>(
+      InternetConnectionChecker());
+  getIt.registerSingleton<ConnectionChecker>(ConnectionCheckerImpl(getIt()));
+  getIt
+      .registerSingleton<NetworkRequestService>(NetworkRequestService(getIt()));
+
+  //repository
+  getIt.registerSingleton<AuthenticationRepository>(
+      AuthenticationRepositoryImpl(getIt()));
 
   //blocs
   getIt.registerFactory<SignUpBloc>(() => SignUpBloc());
