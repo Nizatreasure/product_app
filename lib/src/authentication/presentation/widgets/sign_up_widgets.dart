@@ -64,7 +64,10 @@ _buildHaveAnAccount(BuildContext context, ThemeData themeData) {
           text: ' ${StringManager.signIn}',
           style: TextStyle(
               color: themeData.canvasColor, fontWeight: FontWeight.w600),
-          recognizer: TapGestureRecognizer()..onTap = () {},
+          recognizer: TapGestureRecognizer()
+            ..onTap = () {
+              context.goNamed(RouteNames.signIn);
+            },
         ),
       ],
     ),

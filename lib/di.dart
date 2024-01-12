@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 
+import 'src/authentication/presentation/blocs/sign_in_bloc/sign_in_bloc.dart';
 import 'src/authentication/presentation/blocs/sign_up_bloc/sign_up_bloc.dart';
 
 final getIt = GetIt.instance;
@@ -10,6 +11,7 @@ Future<void> initializaDependencies() async {
 
   //blocs
   getIt.registerFactory<SignUpBloc>(() => SignUpBloc());
+  getIt.registerFactory<SignInBloc>(() => SignInBloc());
   // getIt.registerFactory<OnboardingBloc>(() => OnboardingBloc());
   // getIt.registerFactory<SignInBloc>(() => SignInBloc());
   // getIt.registerFactory<EmailVerificationBloc>(() => EmailVerificationBloc());

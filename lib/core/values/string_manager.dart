@@ -9,4 +9,7 @@ class StringManager {
   static const String signUp = 'Sign Up';
   static const String signIn = 'Sign In';
   static const String haveAnAccount = 'Already have an account?';
+  static const String noAccount = 'Don\'t have an account?';
+  static const String signInText = 'Welcome back. Sign in to continue';
+  static const String forgotPassword = 'Forgot password';
 }
