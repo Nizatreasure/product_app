@@ -19,7 +19,9 @@ class ProductItem extends StatelessWidget {
     ThemeData themeData = Theme.of(context);
     return GestureDetector(
       onTap: () {
-        context.pushNamed(RouteNames.productDetails);
+        if (productModel == null) return;
+        context.pushNamed(RouteNames.productDetails,
+            pathParameters: {'id': productModel!.id.toString()});
       },
       child: Container(
         height: 100.h,
@@ -50,7 +52,17 @@ class ProductItem extends StatelessWidget {
                         fit: BoxFit.cover,
                         placeholder: (context, url) {
                           return Container(
-                              color: ColorManager.tintOrange.withOpacity(0.5));
+                            color: ColorManager.tintOrange.withOpacity(0.5),
+                            alignment: Alignment.center,
+                            child: SizedBox(
+                              height: 25,
+                              width: 25,
+                              child: CircularProgressIndicator(
+                                color: themeData.canvasColor,
+                                strokeWidth: 2.5.r,
+                              ),
+                            ),
+                          );
                         },
                         errorWidget: (context, url, error) {
                           return Container(

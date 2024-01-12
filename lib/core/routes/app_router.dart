@@ -42,9 +42,13 @@ class MyAppRouter {
           routes: [
             GoRoute(
               name: RouteNames.productDetails,
-              path: RouteNames.productDetails,
+              path: '${RouteNames.productDetails}/:id',
               pageBuilder: (context, state) {
-                return const MaterialPage(child: ProductDetailsPage());
+                return MaterialPage(
+                    child: ProductDetailsPage(
+                  productId:
+                      int.tryParse(state.pathParameters['id'] ?? '1') ?? 1,
+                ));
               },
             ),
           ]),

@@ -11,7 +11,11 @@ import 'package:product_app/core/values/string_manager.dart';
 part '../widgets/product_details_widgets.dart';
 
 class ProductDetailsPage extends StatefulWidget {
-  const ProductDetailsPage({super.key});
+  final int productId;
+  const ProductDetailsPage({
+    super.key,
+    required this.productId,
+  });
 
   @override
   State<ProductDetailsPage> createState() => _ProductDetailsPageState();
