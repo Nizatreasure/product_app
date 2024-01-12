@@ -17,7 +17,8 @@ class ThemeManager {
       colorScheme: const ColorScheme.light().copyWith(
         error: ColorManager.red,
       ),
-      dividerColor: ColorManager.grey,
+      dialogBackgroundColor: ColorManager.lightBlue.withOpacity(0.5),
+      dividerColor: ColorManager.tintOrange,
       canvasColor: ColorManager.orange,
     );
   }

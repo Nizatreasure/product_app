@@ -9,5 +9,5 @@ class FontSizeManager {
   static double get f16 => 16.sp.clamp(14, 30);
   // static double get f18 => 18.sp.clamp(16, 35);
   // static double get f20 => 20.sp.clamp(18, 40);
-  // static double get f24 => 24.sp.clamp(22, 55);
+  static double get f24 => 24.sp.clamp(22, 55);
 }

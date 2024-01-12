@@ -9,7 +9,8 @@ class SignUpState {
   bool get isValid =>
       name.trim().isNotEmpty &&
       email.trim().isNotEmpty &&
-      password.trim().isNotEmpty;
+      password.trim().isNotEmpty &&
+      EmailValidator.validate(email);
 
   final FormSubmissionStatus formSubmissionStatus;
 
