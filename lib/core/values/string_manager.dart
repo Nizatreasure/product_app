@@ -16,8 +16,8 @@ class StringManager {
   static const String order = 'Order';
   static const String account = 'Account';
   static const String favourites = 'Favourites';
-  // static const String forgotPassword = '';
-  // static const String forgotPassword = '';
-  // static const String forgotPassword = '';
+  static const String products = 'Products';
+  static const String productDetails = 'Product Details';
+  static const String description = 'Description';
   // static const String forgotPassword = '';
 }
