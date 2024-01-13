@@ -22,9 +22,11 @@ part '../widgets/product_details_widgets.dart';
 
 class ProductDetailsPage extends StatefulWidget {
   final int productId;
+  final bool fromFavourites;
   const ProductDetailsPage({
     super.key,
     required this.productId,
+    this.fromFavourites = false,
   });
 
   @override
@@ -62,7 +64,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                         SizedBox(height: 20.h),
                         _buildTitleAndCategory(themeData, state),
                         SizedBox(height: 14.h),
-                        _buildImage(themeData, state),
+                        _buildImage(themeData, state, widget.fromFavourites),
                         SizedBox(height: 20.h),
                         _buildDescription(themeData, state),
                         SizedBox(height: 15.h),

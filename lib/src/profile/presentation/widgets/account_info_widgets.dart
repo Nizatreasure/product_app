@@ -172,9 +172,11 @@ Widget _buildImage(BuildContext context, ThemeData themeData,
                       )
                     : CachedNetworkImage(
                         imageUrl: user!.photoURL!,
+                        fit: BoxFit.cover,
                       )
                 : Image.file(
                     File(state.profileImagePath),
+                    fit: BoxFit.cover,
                   ),
           ),
         ),

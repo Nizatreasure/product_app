@@ -26,7 +26,8 @@ class ProductItem extends StatelessWidget {
       onTap: () {
         if (productModel == null) return;
         context.pushNamed(RouteNames.productDetails,
-            pathParameters: {'id': productModel!.id.toString()});
+            pathParameters: {'id': productModel!.id.toString()},
+            extra: showFavouriteButton);
       },
       child: Container(
         height: 100.h,
@@ -100,7 +101,9 @@ class ProductItem extends StatelessWidget {
       {required ProductModel? productModel, required Widget child}) {
     return productModel == null
         ? child
-        : Hero(tag: productModel.id, child: child);
+        : Hero(
+            tag: showFavouriteButton ? '${productModel.id}a' : productModel.id,
+            child: child);
   }
 
   Widget _buildProductDisplay(ThemeData themeData) {

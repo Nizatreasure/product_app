@@ -1,8 +1,11 @@
 part of '../pages/product_details_page.dart';
 
-Widget _buildImage(ThemeData themeData, ProductDetailState state) {
+Widget _buildImage(
+    ThemeData themeData, ProductDetailState state, bool fromFavourites) {
   return Hero(
-    tag: state.productDetails!.id,
+    tag: fromFavourites
+        ? '${state.productDetails!.id}a'
+        : state.productDetails!.id,
     child: Container(
       height: 193.h,
       width: double.infinity,
