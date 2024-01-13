@@ -34,6 +34,8 @@ class ErrorHandler implements Exception {
   }
 
   DataFailure _handleFirebaseError(FirebaseAuthException error) {
+    print('error is ${error.code}');
+    print('error is ${error.message}');
     switch (error.code) {
       case 'email-already-in-use':
         return DataStatus.emailInUse.getFailure()!;

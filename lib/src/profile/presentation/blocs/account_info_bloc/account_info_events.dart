@@ -25,4 +25,14 @@ class AccountInfoSetDataEvent extends AccountInfoEvent {
   const AccountInfoSetDataEvent({required this.name, required this.email});
 }
 
-class AccountInfoSubmittedEvent extends AccountInfoEvent {}
+class AccountInfoSubmittedEvent extends AccountInfoEvent {
+  final String? password;
+  final String? email;
+  final String? name;
+  final String? imagePath;
+  const AccountInfoSubmittedEvent(
+      {required this.password,
+      required this.email,
+      required this.name,
+      required this.imagePath});
+}

@@ -8,6 +8,7 @@ import 'package:product_app/src/home/domain/usecases/single_product_usecase.dart
 import 'package:product_app/src/home/presentation/blocs/product_details_bloc/product_detail_bloc.dart';
 import 'package:product_app/src/home/presentation/blocs/product_list_bloc/product_list_bloc.dart';
 import 'package:product_app/src/landing/presentation/blocs/landing_bloc.dart';
+import 'package:product_app/src/profile/data/repositories/account_info_repository_impl.dart';
 import 'package:product_app/src/profile/presentation/blocs/account_info_bloc/account_info_bloc.dart';
 
 import 'core/common/network/connection_checker.dart';
@@ -19,6 +20,7 @@ import 'src/authentication/presentation/blocs/sign_in_bloc/sign_in_bloc.dart';
 import 'src/authentication/presentation/blocs/sign_up_bloc/sign_up_bloc.dart';
 import 'src/home/data/data_sources/remote/product_api_service.dart';
 import 'src/home/data/repositories/product_repository_impl.dart';
+import 'src/profile/domain/usecases/account_info_usecase.dart';
 
 final getIt = GetIt.instance;
 
@@ -49,6 +51,8 @@ Future<void> initializaDependencies() async {
       AuthenticationRepositoryImpl(getIt()));
   getIt.registerSingleton<ProductsRepository>(
       ProductRepositoryImpl(getIt(), getIt()));
+  getIt.registerSingleton<AccountInfoRepository>(
+      AccountInfoRepositoryImpl(getIt()));
 
   //usecase
   getIt.registerSingleton<SignInUseCase>(SignInUseCase(getIt()));
@@ -56,6 +60,7 @@ Future<void> initializaDependencies() async {
   getIt.registerSingleton<SignOutUseCase>(SignOutUseCase(getIt()));
   getIt.registerSingleton<ProductListUseCase>(ProductListUseCase(getIt()));
   getIt.registerSingleton<ProductSingleUseCase>(ProductSingleUseCase(getIt()));
+  getIt.registerSingleton<AccountInfoUseCase>(AccountInfoUseCase(getIt()));
 
   //blocs
   getIt.registerFactory<SignUpBloc>(() => SignUpBloc(getIt()));
@@ -63,7 +68,8 @@ Future<void> initializaDependencies() async {
   getIt.registerFactory<LandingBloc>(() => LandingBloc());
   getIt.registerFactory<ProductListBloc>(() => ProductListBloc(getIt()));
   getIt.registerFactory<ProductDetailBloc>(() => ProductDetailBloc(getIt()));
-  getIt.registerFactory<AccountInfoBloc>(() => AccountInfoBloc());
+  getIt.registerFactory<AccountInfoBloc>(
+      () => AccountInfoBloc(getIt(), getIt()));
   // getIt.registerFactory<KycVerificationBloc>(() => KycVerificationBloc());
   // getIt.registerFactory<EnterEmailBloc>(() => EnterEmailBloc());
 }

@@ -23,6 +23,7 @@ class CustomTextInputField extends StatefulWidget {
   final bool readOnly;
   final void Function()? onTap;
   final double borderRadius;
+  final String? obscuringCharacter;
   const CustomTextInputField({
     super.key,
     required this.hintText,
@@ -43,6 +44,7 @@ class CustomTextInputField extends StatefulWidget {
     this.contentPadding,
     this.textAlign,
     this.borderRadius = 10,
+    this.obscuringCharacter,
   });
 
   @override
@@ -102,6 +104,8 @@ class _CustomTextInputFieldState extends State<CustomTextInputField> {
                 minLines: widget.minLines,
                 readOnly: widget.readOnly,
                 focusNode: _focusNode,
+                obscuringCharacter: widget.obscuringCharacter ?? '•',
+                obscureText: widget.obscuringCharacter != null,
                 decoration: InputDecoration(
                   contentPadding: widget.contentPadding,
                   border: InputBorder.none,

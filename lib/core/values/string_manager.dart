@@ -53,5 +53,13 @@ class StringManager {
   static const String unknown = 'Unknown';
   static const String name = 'Name';
   static const String update = 'Update';
+  static const String reauthenticate = 'Reauthenticate';
+  static const String reauthenticateHint =
+      'Please input your password to continue';
+  static const String done = 'Done';
+  static const String profileDetailsUpdatedSuccessfully =
+      'Your profile information has been successfully updated';
+  static const String changedEmailMessage =
+      'A verification link has been sent to your new email address. Please follow the link to verify you email and log in with your new email';
   // static const String forgotPassword = '';
 }

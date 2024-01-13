@@ -1,8 +1,11 @@
 import 'package:either_dart/either.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:go_router/go_router.dart';
 import 'package:product_app/core/common/enums/enums.dart';
 import 'package:product_app/core/common/network/connection_checker.dart';
 import 'package:product_app/core/common/network/data_failure.dart';
+import 'package:product_app/core/routes/route_names.dart';
+import 'package:product_app/main.dart';
 
 part '../../domain/repositories/auth_repository.dart';
 
@@ -33,6 +36,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   @override
   Future<Either<DataFailure, dynamic>> signOut() async {
     await _auth.signOut();
+    MyApp.navigatorKey.currentContext?.goNamed(RouteNames.signIn);
     return const Right('');
   }
 

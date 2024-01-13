@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:product_app/core/common/widgets/custom_text_input_field.dart';
 import 'package:product_app/core/values/color_manager.dart';
 
 import '../../values/string_manager.dart';
@@ -14,6 +15,7 @@ Future<bool> showCustomDialog(
   bool canPop = true,
   bool showCancelButton = false,
   String cancelButtonText = StringManager.cancel,
+  TextEditingController? controller,
 }) async {
   bool? returnValue = await showDialog(
     context: context,
@@ -27,6 +29,7 @@ Future<bool> showCustomDialog(
         showCancelButton: showCancelButton,
         cancelButtonText: cancelButtonText,
         confirmButtonText: confirmButtonText,
+        controller: controller,
       );
     },
   );
@@ -40,6 +43,7 @@ class CustomDialog extends StatefulWidget {
   final bool showCancelButton;
   final String cancelButtonText;
   final String confirmButtonText;
+  final TextEditingController? controller;
   const CustomDialog({
     super.key,
     required this.canPop,
@@ -48,6 +52,7 @@ class CustomDialog extends StatefulWidget {
     required this.showCancelButton,
     required this.cancelButtonText,
     required this.confirmButtonText,
+    required this.controller,
   });
 
   @override
@@ -86,6 +91,15 @@ class _CustomDialogState extends State<CustomDialog> {
                     .copyWith(color: ColorManager.black),
                 textAlign: TextAlign.center,
               ),
+              if (widget.controller != null)
+                Padding(
+                  padding: EdgeInsetsDirectional.only(top: 20.h),
+                  child: CustomTextInputField(
+                    hintText: StringManager.enterPassword,
+                    textEditingController: widget.controller!,
+                    obscuringCharacter: '●',
+                  ),
+                ),
               SizedBox(height: 40.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

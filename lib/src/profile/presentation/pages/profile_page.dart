@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:product_app/core/common/form_submission/form_submission.dart';
 import 'package:product_app/core/common/widgets/custom_app_bar.dart';
 import 'package:product_app/core/common/widgets/custom_button.dart';
 import 'package:product_app/core/common/widgets/custom_dialog.dart';
@@ -70,9 +69,9 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget _buildSignOutButton(ThemeData themeData) {
     return BlocListener<SignInBloc, SignInState>(
       listener: (context, state) {
-        if (state.logoutFormSubmissionStatus is SubmissionSuccess) {
-          context.goNamed(RouteNames.signIn);
-        }
+        // if (state.logoutFormSubmissionStatus is SubmissionSuccess) {
+        //   context.goNamed(RouteNames.signIn);
+        // }
       },
       child: CustomButton(
         text: StringManager.signOut,

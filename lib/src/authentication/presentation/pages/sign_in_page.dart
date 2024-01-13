@@ -51,7 +51,7 @@ class _SignInPageState extends State<SignInPage> {
                         .message!,
                   );
                 } else if (state.formSubmissionStatus is SubmissionSuccess) {
-                  context.pushNamed(RouteNames.landing);
+                  context.goNamed(RouteNames.landing);
                 }
               },
               child: _buildBody(themeData, context),

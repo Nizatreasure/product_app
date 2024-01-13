@@ -57,7 +57,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     canPop: false,
                   );
                   if (context.mounted) {
-                    context.pushNamed(RouteNames.landing);
+                    context.goNamed(RouteNames.landing);
                   }
                 }
               },
