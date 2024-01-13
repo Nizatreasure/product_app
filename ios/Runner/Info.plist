@@ -49,5 +49,9 @@
 		<true/>
 		<key>UIViewControllerBasedStatusBarAppearance</key>
 		<false/>
+		<key>NSCameraUsageDescription</key>
+		<string>Product App wants to use your camera to take pictures for your profile</string>
+		<key>NSMicrophoneUsageDescription</key>
+		<string>Product App wants to use your microphone to record sound for your profile</string>
 	</dict>
 </plist>

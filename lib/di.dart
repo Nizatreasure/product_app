@@ -21,6 +21,7 @@ import 'src/authentication/presentation/blocs/sign_up_bloc/sign_up_bloc.dart';
 import 'src/home/data/data_sources/remote/product_api_service.dart';
 import 'src/home/data/repositories/product_repository_impl.dart';
 import 'src/profile/domain/usecases/account_info_usecase.dart';
+import 'src/profile/presentation/blocs/take_photo_bloc/take_photo_bloc.dart';
 
 final getIt = GetIt.instance;
 
@@ -70,6 +71,7 @@ Future<void> initializaDependencies() async {
   getIt.registerFactory<ProductDetailBloc>(() => ProductDetailBloc(getIt()));
   getIt.registerFactory<AccountInfoBloc>(
       () => AccountInfoBloc(getIt(), getIt()));
+  getIt.registerFactory<TakePhotoBloc>(() => TakePhotoBloc());
   // getIt.registerFactory<KycVerificationBloc>(() => KycVerificationBloc());
   // getIt.registerFactory<EnterEmailBloc>(() => EnterEmailBloc());
 }

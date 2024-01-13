@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,10 +14,13 @@ import 'package:product_app/core/common/widgets/custom_app_bar.dart';
 import 'package:product_app/core/common/widgets/custom_button.dart';
 import 'package:product_app/core/common/widgets/custom_dialog.dart';
 import 'package:product_app/core/common/widgets/custom_text_input_field.dart';
+import 'package:product_app/core/routes/route_names.dart';
 import 'package:product_app/core/values/asset_manager.dart';
+import 'package:product_app/core/values/color_manager.dart';
 import 'package:product_app/core/values/fontsize_manager.dart';
 import 'package:product_app/core/values/string_manager.dart';
 import 'package:product_app/di.dart';
+import 'package:product_app/globals.dart';
 import 'package:product_app/src/authentication/presentation/blocs/sign_in_bloc/sign_in_bloc.dart';
 import 'package:product_app/src/profile/presentation/blocs/account_info_bloc/account_info_bloc.dart';
 
@@ -89,54 +95,32 @@ class _AccountInfoPageState extends State<AccountInfoPage> {
   }
 
   Widget _buildBody(User? user, ThemeData themeData, BuildContext context) {
-    return Padding(
-      padding: EdgeInsetsDirectional.symmetric(horizontal: 20.w),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(height: 15.h),
-            Stack(
-              children: [
-                CircleAvatar(
-                  radius: 50.r,
-                  backgroundColor: themeData.dialogBackgroundColor,
-                  child: user?.photoURL == null
-                      ? Icon(
-                          Icons.person_3,
-                          size: 60,
-                          color: themeData.canvasColor,
-                        )
-                      : CachedNetworkImage(
-                          imageUrl: user!.photoURL!,
-                        ),
-                ),
-                PositionedDirectional(
-                  end: 10.w,
-                  bottom: 3.h,
-                  child: SvgPicture.asset(
-                    AppAssetManager.edit,
-                    width: 24.r,
-                    height: 24.r,
-                  ),
-                )
-              ],
-            ),
-            SizedBox(height: 13.h),
-            Text(
-              user?.displayName ?? StringManager.unknown,
-              style: themeData.textTheme.bodyMedium!.copyWith(
-                  fontSize: FontSizeManager.f18, fontWeight: FontWeight.w600),
-            ),
-            Text(user?.email ?? 'unknown@unknown.com'),
-            SizedBox(height: 45.h),
-            _buildNameField(context),
-            _buildEmailField(context),
-            SizedBox(height: 20.h),
-            _buildButton(context, user),
-          ],
+    return BlocBuilder<AccountInfoBloc, AccountInfoState>(
+        builder: (context, state) {
+      return Padding(
+        padding: EdgeInsetsDirectional.symmetric(horizontal: 20.w),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(height: 15.h),
+              _buildImage(context, themeData, state, user),
+              SizedBox(height: 13.h),
+              Text(
+                user?.displayName ?? StringManager.unknown,
+                style: themeData.textTheme.bodyMedium!.copyWith(
+                    fontSize: FontSizeManager.f18, fontWeight: FontWeight.w600),
+              ),
+              Text(user?.email ?? 'unknown@unknown.com'),
+              SizedBox(height: 45.h),
+              _buildNameField(context),
+              _buildEmailField(context),
+              SizedBox(height: 20.h),
+              _buildButton(context, user),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 
   Widget _buildButton(BuildContext context, User? user) {

@@ -23,4 +23,6 @@ class AppAssetManager {
   static const String arrowForward = '$_svgPath/arrow-forward.svg';
   static const String edit = '$_svgPath/edit.svg';
   static const String sync = '$_svgPath/sync.svg';
+  static const String upload = '$_svgPath/upload.svg';
+  static const String camera = '$_svgPath/camera.svg';
 }

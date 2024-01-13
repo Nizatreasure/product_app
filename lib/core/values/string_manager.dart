@@ -62,6 +62,9 @@ class StringManager {
   static const String changedEmailMessage =
       'A verification link has been sent to your new email address. Please follow the link to verify you email and log in with your new email';
   static const String couldNotLaunchCamera = 'Could not launch camera';
-  // static const String forgotPassword = '';
+  static const String uploadFromGallery = 'Upload from phone gallery';
+  static const String takeAPicture = 'Take a picture';
+  static const String cameraNotFound = 'Camera not found';
+  static const String uploadImage = 'Upload Image';
   // static const String forgotPassword = '';
 }
