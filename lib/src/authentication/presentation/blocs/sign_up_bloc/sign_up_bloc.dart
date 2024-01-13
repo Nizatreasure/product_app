@@ -57,6 +57,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     final dataState = await _signUpUseCase.execute(params: {
       'email': state.email,
       'password': state.password,
+      'name': state.name,
     });
     CustomLoader.dismissLoader();
     if (dataState.isRight) {

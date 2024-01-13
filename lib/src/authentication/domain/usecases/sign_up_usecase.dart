@@ -12,6 +12,8 @@ class SignUpUseCase
   Future<Either<DataFailure, UserCredential>> execute(
       {required Map<String, dynamic> params}) {
     return _authRepository.signUp(
-        email: params['email'], password: params['password']);
+        email: params['email'],
+        password: params['password'],
+        name: params['name']);
   }
 }

@@ -41,7 +41,9 @@ class _ProfilePageState extends State<ProfilePage> {
               imagePath: AppAssetManager.account,
               title: StringManager.accountInfo,
               themeData: themeData,
-              onTap: () {},
+              onTap: () {
+                context.pushNamed(RouteNames.accountInfo);
+              },
             ),
             _profileButton(
               imagePath: AppAssetManager.location,

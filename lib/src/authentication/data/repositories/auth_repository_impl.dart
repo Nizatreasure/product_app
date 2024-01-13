@@ -13,12 +13,14 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
 
   @override
   Future<Either<DataFailure, UserCredential>> signUp(
-      {required String email, required String password}) async {
+      {required String email,
+      required String password,
+      required String name}) async {
     if (await _connectionChecker.isConnected) {
       try {
         final credential = await _auth.createUserWithEmailAndPassword(
             email: email, password: password);
-        await credential.user?.updateDisplayName('Niza');
+        await credential.user?.updateDisplayName(name);
         return Right(credential);
       } catch (e) {
         return Left(ErrorHandler.handleError(e).failure);

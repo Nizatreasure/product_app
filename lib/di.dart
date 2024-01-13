@@ -8,6 +8,7 @@ import 'package:product_app/src/home/domain/usecases/single_product_usecase.dart
 import 'package:product_app/src/home/presentation/blocs/product_details_bloc/product_detail_bloc.dart';
 import 'package:product_app/src/home/presentation/blocs/product_list_bloc/product_list_bloc.dart';
 import 'package:product_app/src/landing/presentation/blocs/landing_bloc.dart';
+import 'package:product_app/src/profile/presentation/blocs/account_info_bloc/account_info_bloc.dart';
 
 import 'core/common/network/connection_checker.dart';
 import 'core/services/network_request_service.dart';
@@ -62,7 +63,7 @@ Future<void> initializaDependencies() async {
   getIt.registerFactory<LandingBloc>(() => LandingBloc());
   getIt.registerFactory<ProductListBloc>(() => ProductListBloc(getIt()));
   getIt.registerFactory<ProductDetailBloc>(() => ProductDetailBloc(getIt()));
-  // getIt.registerFactory<CreatePinBloc>(() => CreatePinBloc());
+  getIt.registerFactory<AccountInfoBloc>(() => AccountInfoBloc());
   // getIt.registerFactory<KycVerificationBloc>(() => KycVerificationBloc());
   // getIt.registerFactory<EnterEmailBloc>(() => EnterEmailBloc());
 }

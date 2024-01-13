@@ -7,6 +7,7 @@ import 'package:product_app/src/authentication/presentation/pages/sign_in_page.d
 import 'package:product_app/src/authentication/presentation/pages/sign_up_page.dart';
 import 'package:product_app/src/home/presentation/pages/product_details_page.dart';
 import 'package:product_app/src/landing/presentation/pages/landing_page.dart';
+import 'package:product_app/src/profile/presentation/pages/account_info_page.dart';
 
 class MyAppRouter {
   static GoRouter router = GoRouter(
@@ -34,24 +35,33 @@ class MyAppRouter {
         },
       ),
       GoRoute(
-          name: RouteNames.landing,
-          path: RouteNames.landing,
-          pageBuilder: (context, state) {
-            return const MaterialPage(child: LandingPage());
-          },
-          routes: [
-            GoRoute(
-              name: RouteNames.productDetails,
-              path: '${RouteNames.productDetails}/:id',
-              pageBuilder: (context, state) {
-                return MaterialPage(
-                    child: ProductDetailsPage(
+        name: RouteNames.landing,
+        path: RouteNames.landing,
+        pageBuilder: (context, state) {
+          return const MaterialPage(child: LandingPage());
+        },
+        routes: [
+          GoRoute(
+            name: RouteNames.productDetails,
+            path: '${RouteNames.productDetails}/:id',
+            pageBuilder: (context, state) {
+              return MaterialPage(
+                child: ProductDetailsPage(
                   productId:
                       int.tryParse(state.pathParameters['id'] ?? '1') ?? 1,
-                ));
-              },
-            ),
-          ]),
+                ),
+              );
+            },
+          ),
+          GoRoute(
+            name: RouteNames.accountInfo,
+            path: RouteNames.accountInfo,
+            pageBuilder: (context, state) {
+              return const MaterialPage(child: AccountInfoPage());
+            },
+          ),
+        ],
+      ),
     ],
   );
 }

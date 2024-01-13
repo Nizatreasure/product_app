@@ -50,5 +50,8 @@ class StringManager {
   static const String no = 'No';
   static const String logout = 'Logout';
   static const String logoutConfirmation = 'Are you sure you want to log out?';
+  static const String unknown = 'Unknown';
+  static const String name = 'Name';
+  static const String update = 'Update';
   // static const String forgotPassword = '';
 }
