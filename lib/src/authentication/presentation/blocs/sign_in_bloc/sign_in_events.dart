@@ -19,6 +19,11 @@ class SignInTogglePasswordVisibility extends SignInEvent {
   const SignInTogglePasswordVisibility(this.isVisible);
 }
 
+class SignInToggleRememberMeEvent extends SignInEvent {
+  final bool rememberMe;
+  const SignInToggleRememberMeEvent(this.rememberMe);
+}
+
 class SignInSubmittedEvent extends SignInEvent {}
 
 class SignOutSubmittedEvent extends SignInEvent {}

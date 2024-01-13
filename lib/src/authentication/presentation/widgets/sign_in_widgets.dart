@@ -61,20 +61,51 @@ _buildHaveAnAccount(BuildContext context, ThemeData themeData) {
 }
 
 Widget _buildForgotPassword(ThemeData themeData, BuildContext context) {
-  return InkWell(
-    onTap: () {
-      FocusScope.of(context).unfocus();
-    },
-    child: Container(
-      padding: const EdgeInsetsDirectional.symmetric(
-        vertical: 5,
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      BlocBuilder<SignInBloc, SignInState>(builder: (context, state) {
+        return Row(
+          children: [
+            SizedBox(
+              width: 24.r,
+              height: 24.r,
+              child: Checkbox(
+                value: state.rememberMe,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.r),
+                ),
+                activeColor: themeData.canvasColor,
+                onChanged: (value) {
+                  context.read<SignInBloc>().add(
+                      SignInToggleRememberMeEvent(value ?? !state.rememberMe));
+                },
+              ),
+            ),
+            SizedBox(width: 8.w),
+            Text(
+              StringManager.rememberMe,
+              style: themeData.textTheme.bodyMedium,
+            )
+          ],
+        );
+      }),
+      InkWell(
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+        child: Container(
+          padding: const EdgeInsetsDirectional.symmetric(
+            vertical: 5,
+          ),
+          alignment: AlignmentDirectional.centerEnd,
+          child: Text(
+            '${StringManager.forgotPassword}?',
+            style: themeData.textTheme.bodyMedium!
+                .copyWith(color: themeData.canvasColor),
+          ),
+        ),
       ),
-      alignment: AlignmentDirectional.centerEnd,
-      child: Text(
-        '${StringManager.forgotPassword}?',
-        style: themeData.textTheme.bodyMedium!
-            .copyWith(color: themeData.canvasColor),
-      ),
-    ),
+    ],
   );
 }

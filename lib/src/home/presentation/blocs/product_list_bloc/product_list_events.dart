@@ -4,6 +4,8 @@ abstract class ProductListEvent {
   const ProductListEvent();
 }
 
+class ProductListResetStateEvent extends ProductListEvent {}
+
 class ProductListGetProductsEvent extends ProductListEvent {}
 
 class ProductListGetFavouritesEvent extends ProductListEvent {}

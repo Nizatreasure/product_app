@@ -74,4 +74,5 @@ class StringManager {
   static const String jewelry = 'Jewelry';
   static const String mensClothing = 'Men\'s';
   static const String womensClothing = 'Women\'s';
+  static const String rememberMe = 'Remember me';
 }

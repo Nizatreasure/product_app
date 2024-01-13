@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:product_app/core/common/form_submission/form_submission.dart';
+import 'package:product_app/core/common/user_data.dart';
 import 'package:product_app/core/common/widgets/custom_button.dart';
 import 'package:product_app/core/common/widgets/custom_dialog.dart';
 import 'package:product_app/core/common/widgets/custom_password_field.dart';
@@ -25,9 +26,17 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
+  final TextEditingController _emailController = TextEditingController();
   @override
   void initState() {
-    context.read<SignInBloc>().add(ResetSignInStateEvent());
+    context.read<SignInBloc>()
+      ..add(ResetSignInStateEvent())
+      ..add(SignInToggleRememberMeEvent(UserData.rememberMe));
+
+    if (UserData.rememberMe) {
+      context.read<SignInBloc>().add(SignInEmailChangedEvent(UserData.email));
+      _emailController.text = UserData.email;
+    }
     super.initState();
   }
 
@@ -84,10 +93,10 @@ class _SignInPageState extends State<SignInPage> {
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 30.h),
-            _buildEmailField(context),
+            _buildEmailField(context, _emailController),
             _buildPasswordField(context),
             _buildForgotPassword(themeData, context),
-            SizedBox(height: 20.h),
+            SizedBox(height: 30.h),
             _buildButton(context),
             SizedBox(height: 30.h),
             _buildHaveAnAccount(context, themeData),

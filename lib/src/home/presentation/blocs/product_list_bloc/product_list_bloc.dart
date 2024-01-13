@@ -19,6 +19,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     on<ProductListGetProductsEvent>(_getProductsEventHandler);
     on<ProductListGetFavouritesEvent>(_getFavouritesEventHandler);
     on<ProductListSetFavouritesEvent>(_setFavouritesEventHandler);
+    on<ProductListResetStateEvent>(_resetState);
   }
 
   _getProductsEventHandler(
@@ -64,5 +65,10 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     emit(state.copyWith(favouriteIds: newList));
 
     await _saveFavouritesUseCase.execute(params: state.favouriteIds);
+  }
+
+  _resetState(
+      ProductListResetStateEvent event, Emitter<ProductListState> emit) {
+    emit(const ProductListState());
   }
 }

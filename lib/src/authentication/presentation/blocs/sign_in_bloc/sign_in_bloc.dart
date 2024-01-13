@@ -1,6 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:product_app/core/common/user_data.dart';
 import 'package:product_app/core/common/widgets/custom_loader.dart';
 import 'package:product_app/src/authentication/domain/usecases/sign_in_usecase.dart';
 import 'package:product_app/src/authentication/domain/usecases/sign_out_usecase.dart';
@@ -22,6 +23,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     on<SignInSubmittedEvent>(_signInEventHandler);
     on<ResetSignInStateEvent>(_resetStateEventHandler);
     on<SignOutSubmittedEvent>(_signOutEventHandler);
+    on<SignInToggleRememberMeEvent>(_toggleRememberMeEventHandler);
   }
 
   void _resetStateEventHandler(
@@ -46,6 +48,12 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     emit(state.copyWith(showPassword: event.isVisible));
   }
 
+  void _toggleRememberMeEventHandler(
+      SignInToggleRememberMeEvent event, Emitter<SignInState> emit) {
+    UserData.rememberMe = event.rememberMe;
+    emit(state.copyWith(rememberMe: event.rememberMe));
+  }
+
   void _signInEventHandler(SignInEvent event, Emitter<SignInState> emit) async {
     emit(state.copyWith(
       formSubmissionStatus: SubmittingForm(),
@@ -58,6 +66,8 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     });
     CustomLoader.dismissLoader();
     if (dataState.isRight) {
+      UserData.email = state.rememberMe ? state.email : '';
+
       emit(state.copyWith(
           formSubmissionStatus:
               SubmissionSuccess<UserCredential>(dataState.right)));

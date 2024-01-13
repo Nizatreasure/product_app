@@ -22,7 +22,9 @@ class _HomePageState extends State<HomePage>
     with AutomaticKeepAliveClientMixin {
   @override
   void initState() {
-    context.read<ProductListBloc>().add(ProductListGetProductsEvent());
+    context.read<ProductListBloc>()
+      ..add(ProductListResetStateEvent())
+      ..add(ProductListGetProductsEvent());
     super.initState();
   }
 
