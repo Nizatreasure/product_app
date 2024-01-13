@@ -16,6 +16,8 @@ import 'package:product_app/src/home/data/data_sources/local_data_source.dart';
 import 'package:product_app/src/home/presentation/blocs/product_details_bloc/product_detail_bloc.dart';
 import 'package:product_app/src/home/presentation/widgets/product_review_widget.dart';
 
+import '../blocs/product_list_bloc/product_list_bloc.dart';
+
 part '../widgets/product_details_widgets.dart';
 
 class ProductDetailsPage extends StatefulWidget {

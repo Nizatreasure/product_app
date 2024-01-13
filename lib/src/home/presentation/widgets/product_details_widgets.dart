@@ -138,12 +138,29 @@ Widget _buildTitleAndCategory(ThemeData themeData, ProductDetailState state) {
         ),
       ),
       SizedBox(width: 10.w),
-      SvgPicture.asset(
-        AppAssetManager.favourite,
-        width: 22.r,
-        height: 22.r,
-        colorFilter: ColorFilter.mode(themeData.canvasColor, BlendMode.srcIn),
-      )
+      BlocBuilder<ProductListBloc, ProductListState>(
+          builder: (context, pState) {
+        return GestureDetector(
+          onTap: () {
+            context
+                .read<ProductListBloc>()
+                .add(ProductListSetFavouritesEvent(state.productDetails!.id));
+          },
+          child: pState.favouriteIds.contains(state.productDetails!.id)
+              ? Image.asset(
+                  AppAssetManager.favouriteFill,
+                  width: 22.r,
+                  height: 22.r,
+                )
+              : SvgPicture.asset(
+                  AppAssetManager.favourite,
+                  width: 22.r,
+                  height: 22.r,
+                  colorFilter:
+                      ColorFilter.mode(themeData.canvasColor, BlendMode.srcIn),
+                ),
+        );
+      })
     ],
   );
 }

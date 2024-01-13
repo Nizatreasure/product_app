@@ -5,3 +5,10 @@ abstract class ProductListEvent {
 }
 
 class ProductListGetProductsEvent extends ProductListEvent {}
+
+class ProductListGetFavouritesEvent extends ProductListEvent {}
+
+class ProductListSetFavouritesEvent extends ProductListEvent {
+  final int productId;
+  const ProductListSetFavouritesEvent(this.productId);
+}

@@ -3,7 +3,9 @@ import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:product_app/src/authentication/domain/usecases/sign_in_usecase.dart';
 import 'package:product_app/src/home/data/data_sources/remote_data_sources.dart';
+import 'package:product_app/src/home/domain/usecases/get_favourites.dart';
 import 'package:product_app/src/home/domain/usecases/product_list_usecase.dart';
+import 'package:product_app/src/home/domain/usecases/save_favourite_usecase.dart';
 import 'package:product_app/src/home/domain/usecases/single_product_usecase.dart';
 import 'package:product_app/src/home/presentation/blocs/product_details_bloc/product_detail_bloc.dart';
 import 'package:product_app/src/home/presentation/blocs/product_list_bloc/product_list_bloc.dart';
@@ -51,7 +53,7 @@ Future<void> initializaDependencies() async {
   getIt.registerSingleton<AuthenticationRepository>(
       AuthenticationRepositoryImpl(getIt()));
   getIt.registerSingleton<ProductsRepository>(
-      ProductRepositoryImpl(getIt(), getIt()));
+      ProductRepositoryImpl(getIt(), getIt(), getIt()));
   getIt.registerSingleton<AccountInfoRepository>(
       AccountInfoRepositoryImpl(getIt()));
 
@@ -62,12 +64,16 @@ Future<void> initializaDependencies() async {
   getIt.registerSingleton<ProductListUseCase>(ProductListUseCase(getIt()));
   getIt.registerSingleton<ProductSingleUseCase>(ProductSingleUseCase(getIt()));
   getIt.registerSingleton<AccountInfoUseCase>(AccountInfoUseCase(getIt()));
+  getIt.registerSingleton<GetFavouritesUseCase>(GetFavouritesUseCase(getIt()));
+  getIt
+      .registerSingleton<SaveFavouritesUseCase>(SaveFavouritesUseCase(getIt()));
 
   //blocs
   getIt.registerFactory<SignUpBloc>(() => SignUpBloc(getIt()));
   getIt.registerFactory<SignInBloc>(() => SignInBloc(getIt(), getIt()));
   getIt.registerFactory<LandingBloc>(() => LandingBloc());
-  getIt.registerFactory<ProductListBloc>(() => ProductListBloc(getIt()));
+  getIt.registerFactory<ProductListBloc>(
+      () => ProductListBloc(getIt(), getIt(), getIt()));
   getIt.registerFactory<ProductDetailBloc>(() => ProductDetailBloc(getIt()));
   getIt.registerFactory<AccountInfoBloc>(
       () => AccountInfoBloc(getIt(), getIt()));

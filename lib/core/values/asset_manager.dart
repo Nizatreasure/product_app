@@ -4,6 +4,7 @@ class AppAssetManager {
 
   //images
   static const String voicePlay = '$_imagePath/voice_play.png';
+  static const String favouriteFill = '$_imagePath/favourite-fill.png';
 
   //svg
   static const String eyeOpen = '$_svgPath/eye-open.svg';
@@ -13,7 +14,6 @@ class AppAssetManager {
   static const String account = '$_svgPath/account.svg';
   static const String favourite = '$_svgPath/favourite.svg';
   static const String star = '$_svgPath/star.svg';
-  static const String favouriteFill = '$_svgPath/favourite-fill.svg';
   static const String error = '$_svgPath/error.svg';
   static const String starFill = '$_svgPath/star-fill.svg';
   static const String starEmpty = '$_svgPath/star-empty.svg';
