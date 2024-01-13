@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:product_app/core/common/form_submission/form_submission.dart';
+import 'package:product_app/core/common/user_data.dart';
 import 'package:product_app/core/common/widgets/custom_button.dart';
 import 'package:product_app/core/common/widgets/custom_dialog.dart';
 import 'package:product_app/core/common/widgets/custom_password_field.dart';
@@ -12,6 +13,7 @@ import 'package:product_app/core/common/widgets/custom_text_input_field.dart';
 import 'package:product_app/core/routes/route_names.dart';
 import 'package:product_app/core/values/fontsize_manager.dart';
 import 'package:product_app/core/values/string_manager.dart';
+import 'package:product_app/src/authentication/presentation/blocs/sign_in_bloc/sign_in_bloc.dart';
 import 'package:product_app/src/authentication/presentation/blocs/sign_up_bloc/sign_up_bloc.dart';
 
 part '../widgets/sign_up_widgets.dart';
@@ -57,7 +59,10 @@ class _SignUpPageState extends State<SignUpPage> {
                     canPop: false,
                   );
                   if (context.mounted) {
-                    context.goNamed(RouteNames.landing);
+                    UserData.email = state.email;
+                    context.read<SignInBloc>()
+                      ..add(const SignInToggleRememberMeEvent(true))
+                      ..add(SignOutSubmittedEvent());
                   }
                 }
               },

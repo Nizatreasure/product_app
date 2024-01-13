@@ -23,7 +23,8 @@ class StringManager {
   static const String error = 'Error';
   static const String close = 'Close';
   static const String successful = 'Successful';
-  static const String signUpSuccessful = 'Your sign up was successful';
+  static const String signUpSuccessful =
+      'Your sign up was successful. You can proceed to log into your account';
   static const String continue_ = 'Continue';
   static const String retry = 'Retry';
   static const String specifications = 'Specifications';
