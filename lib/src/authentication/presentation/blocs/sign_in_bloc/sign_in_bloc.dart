@@ -71,5 +71,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   void _signOutEventHandler(
       SignOutSubmittedEvent event, Emitter<SignInState> emit) async {
     await _signOutUseCase.execute(params: null);
+    emit(state.copyWith(logoutFormSubmissionStatus: SubmissionSuccess('')));
+    emit(state.copyWith(logoutFormSubmissionStatus: const InitialFormStatus()));
   }
 }

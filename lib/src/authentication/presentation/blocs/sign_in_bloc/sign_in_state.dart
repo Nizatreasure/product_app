@@ -11,12 +11,14 @@ class SignInState {
       EmailValidator.validate(email);
 
   final FormSubmissionStatus formSubmissionStatus;
+  final FormSubmissionStatus logoutFormSubmissionStatus;
 
   const SignInState({
     this.email = '',
     this.password = '',
     this.showPassword = false,
     this.formSubmissionStatus = const InitialFormStatus(),
+    this.logoutFormSubmissionStatus = const InitialFormStatus(),
   });
 
   SignInState copyWith({
@@ -24,12 +26,15 @@ class SignInState {
     String? password,
     bool? showPassword,
     FormSubmissionStatus? formSubmissionStatus,
+    FormSubmissionStatus? logoutFormSubmissionStatus,
   }) {
     return SignInState(
       email: email ?? this.email,
       password: password ?? this.password,
       showPassword: showPassword ?? this.showPassword,
       formSubmissionStatus: formSubmissionStatus ?? this.formSubmissionStatus,
+      logoutFormSubmissionStatus:
+          logoutFormSubmissionStatus ?? this.logoutFormSubmissionStatus,
     );
   }
 }

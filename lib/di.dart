@@ -12,6 +12,7 @@ import 'package:product_app/src/landing/presentation/blocs/landing_bloc.dart';
 import 'core/common/network/connection_checker.dart';
 import 'core/services/network_request_service.dart';
 import 'src/authentication/data/repositories/auth_repository_impl.dart';
+import 'src/authentication/domain/usecases/sign_out_usecase.dart';
 import 'src/authentication/domain/usecases/sign_up_usecase.dart';
 import 'src/authentication/presentation/blocs/sign_in_bloc/sign_in_bloc.dart';
 import 'src/authentication/presentation/blocs/sign_up_bloc/sign_up_bloc.dart';
@@ -51,6 +52,7 @@ Future<void> initializaDependencies() async {
   //usecase
   getIt.registerSingleton<SignInUseCase>(SignInUseCase(getIt()));
   getIt.registerSingleton<SignUpUseCase>(SignUpUseCase(getIt()));
+  getIt.registerSingleton<SignOutUseCase>(SignOutUseCase(getIt()));
   getIt.registerSingleton<ProductListUseCase>(ProductListUseCase(getIt()));
   getIt.registerSingleton<ProductSingleUseCase>(ProductSingleUseCase(getIt()));
 

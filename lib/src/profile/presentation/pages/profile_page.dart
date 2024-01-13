@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:product_app/core/common/form_submission/form_submission.dart';
 import 'package:product_app/core/common/widgets/custom_app_bar.dart';
 import 'package:product_app/core/common/widgets/custom_button.dart';
 import 'package:product_app/core/common/widgets/custom_dialog.dart';
@@ -65,26 +66,32 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Widget _buildSignOutButton(ThemeData themeData) {
-    return CustomButton(
-      text: StringManager.signOut,
-      backgroundColor: Colors.transparent,
-      textColor: themeData.canvasColor,
-      showDisabledState: false,
-      width: 200.w,
-      onTap: () async {
-        bool logout = await showCustomDialog(
-          context,
-          title: StringManager.logout,
-          body: StringManager.logoutConfirmation,
-          confirmButtonText: StringManager.yes,
-          cancelButtonText: StringManager.no,
-          showCancelButton: true,
-        );
-        if (context.mounted && logout) {
-          context.read<SignInBloc>().add(SignOutSubmittedEvent());
+    return BlocListener<SignInBloc, SignInState>(
+      listener: (context, state) {
+        if (state.logoutFormSubmissionStatus is SubmissionSuccess) {
           context.goNamed(RouteNames.signIn);
         }
       },
+      child: CustomButton(
+        text: StringManager.signOut,
+        backgroundColor: Colors.transparent,
+        textColor: themeData.canvasColor,
+        showDisabledState: false,
+        width: 200.w,
+        onTap: () async {
+          bool logout = await showCustomDialog(
+            context,
+            title: StringManager.logout,
+            body: StringManager.logoutConfirmation,
+            confirmButtonText: StringManager.yes,
+            cancelButtonText: StringManager.no,
+            showCancelButton: true,
+          );
+          if (context.mounted && logout) {
+            context.read<SignInBloc>().add(SignOutSubmittedEvent());
+          }
+        },
+      ),
     );
   }
 }
