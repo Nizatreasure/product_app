@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:product_app/core/routes/route_names.dart';
@@ -14,6 +13,8 @@ import 'package:product_app/src/profile/presentation/blocs/take_photo_bloc/take_
 import 'package:product_app/src/profile/presentation/pages/account_info_page.dart';
 import 'package:product_app/src/profile/presentation/pages/take_photo_page.dart';
 
+import '../common/widgets/custom_page_transition.dart';
+
 class MyAppRouter {
   static GoRouter router = GoRouter(
     navigatorKey: MyApp.navigatorKey,
@@ -23,7 +24,7 @@ class MyAppRouter {
         name: RouteNames.signIn,
         path: RouteNames.signIn,
         pageBuilder: (context, state) {
-          return const MaterialPage(child: SignInPage());
+          return CustomPageTransition(child: const SignInPage());
         },
         redirect: (context, state) async {
           if (FirebaseAuth.instance.currentUser != null) {
@@ -36,21 +37,21 @@ class MyAppRouter {
         name: RouteNames.signUp,
         path: RouteNames.signUp,
         pageBuilder: (context, state) {
-          return const MaterialPage(child: SignUpPage());
+          return CustomPageTransition(child: const SignUpPage());
         },
       ),
       GoRoute(
         name: RouteNames.landing,
         path: RouteNames.landing,
         pageBuilder: (context, state) {
-          return const MaterialPage(child: LandingPage());
+          return CustomPageTransition(child: const LandingPage());
         },
         routes: [
           GoRoute(
             name: RouteNames.productDetails,
             path: '${RouteNames.productDetails}/:id',
             pageBuilder: (context, state) {
-              return MaterialPage(
+              return CustomPageTransition(
                 child: ProductDetailsPage(
                   productId:
                       int.tryParse(state.pathParameters['id'] ?? '1') ?? 1,
@@ -62,14 +63,14 @@ class MyAppRouter {
             name: RouteNames.accountInfo,
             path: RouteNames.accountInfo,
             pageBuilder: (context, state) {
-              return const MaterialPage(child: AccountInfoPage());
+              return CustomPageTransition(child: const AccountInfoPage());
             },
           ),
           GoRoute(
             name: RouteNames.takePhoto,
             path: RouteNames.takePhoto,
             pageBuilder: (context, state) {
-              return MaterialPage(
+              return CustomPageTransition(
                   child: BlocProvider<TakePhotoBloc>(
                       create: (context) => TakePhotoBloc()
                         ..add(TakePhotoInitialEvent(Globals.cameras.first)),

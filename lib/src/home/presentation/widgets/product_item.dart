@@ -40,35 +40,40 @@ class ProductItem extends StatelessWidget {
         ),
         child: Row(
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10.r),
-              child: SizedBox(
-                width: 100.h,
-                height: 100.h,
-                child: productModel == null
-                    ? Container(color: ColorManager.tintOrange.withOpacity(0.5))
-                    : CachedNetworkImage(
-                        imageUrl: productModel!.image,
-                        fit: BoxFit.cover,
-                        placeholder: (context, url) {
-                          return Container(
-                            color: ColorManager.tintOrange.withOpacity(0.5),
-                            alignment: Alignment.center,
-                            child: SizedBox(
-                              height: 25,
-                              width: 25,
-                              child: CircularProgressIndicator(
-                                color: themeData.canvasColor,
-                                strokeWidth: 2.5.r,
+            _buildHero(
+              productModel: productModel,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10.r),
+                child: SizedBox(
+                  width: 100.h,
+                  height: 100.h,
+                  child: productModel == null
+                      ? Container(
+                          color: ColorManager.tintOrange.withOpacity(0.5))
+                      : CachedNetworkImage(
+                          imageUrl: productModel!.image,
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) {
+                            return Container(
+                              color: ColorManager.tintOrange.withOpacity(0.5),
+                              alignment: Alignment.center,
+                              child: SizedBox(
+                                height: 25,
+                                width: 25,
+                                child: CircularProgressIndicator(
+                                  color: themeData.canvasColor,
+                                  strokeWidth: 2.5.r,
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                        errorWidget: (context, url, error) {
-                          return Container(
-                              color: ColorManager.tintOrange.withOpacity(0.5));
-                        },
-                      ),
+                            );
+                          },
+                          errorWidget: (context, url, error) {
+                            return Container(
+                                color:
+                                    ColorManager.tintOrange.withOpacity(0.5));
+                          },
+                        ),
+                ),
               ),
             ),
             SizedBox(width: 20.w),
@@ -84,6 +89,13 @@ class ProductItem extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget _buildHero(
+      {required ProductModel? productModel, required Widget child}) {
+    return productModel == null
+        ? child
+        : Hero(tag: productModel.image, child: child);
   }
 
   Widget _buildProdutDisplay(ThemeData themeData) {

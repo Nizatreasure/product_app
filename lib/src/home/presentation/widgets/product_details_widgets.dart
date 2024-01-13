@@ -1,32 +1,35 @@
 part of '../pages/product_details_page.dart';
 
 Widget _buildImage(ThemeData themeData, ProductDetailState state) {
-  return Container(
-    height: 193.h,
-    width: double.infinity,
-    clipBehavior: Clip.antiAlias,
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(20.r),
-    ),
-    child: CachedNetworkImage(
-      imageUrl: state.productDetails!.image,
-      placeholder: (context, url) {
-        return Container(
-          color: ColorManager.tintOrange.withOpacity(0.5),
-          alignment: Alignment.center,
-          child: SizedBox(
-            height: 50,
-            width: 50,
-            child: CircularProgressIndicator(
-              color: themeData.canvasColor,
-              strokeWidth: 2.5.r,
+  return Hero(
+    tag: state.productDetails!.image,
+    child: Container(
+      height: 193.h,
+      width: double.infinity,
+      clipBehavior: Clip.antiAlias,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20.r),
+      ),
+      child: CachedNetworkImage(
+        imageUrl: state.productDetails!.image,
+        placeholder: (context, url) {
+          return Container(
+            color: ColorManager.tintOrange.withOpacity(0.5),
+            alignment: Alignment.center,
+            child: SizedBox(
+              height: 50,
+              width: 50,
+              child: CircularProgressIndicator(
+                color: themeData.canvasColor,
+                strokeWidth: 2.5.r,
+              ),
             ),
-          ),
-        );
-      },
-      errorWidget: (context, url, error) {
-        return Container(color: ColorManager.tintOrange);
-      },
+          );
+        },
+        errorWidget: (context, url, error) {
+          return Container(color: ColorManager.tintOrange);
+        },
+      ),
     ),
   );
 }
@@ -125,6 +128,12 @@ Widget _buildTitleAndCategory(ThemeData themeData, ProductDetailState state) {
               style: themeData.textTheme.bodyMedium!
                   .copyWith(color: themeData.disabledColor),
             ),
+            SizedBox(height: 4.h),
+            Text(
+              '\$ ${state.productDetails!.price}',
+              style: themeData.textTheme.bodyLarge!.copyWith(
+                  color: themeData.canvasColor, fontSize: FontSizeManager.f18),
+            )
           ],
         ),
       ),
