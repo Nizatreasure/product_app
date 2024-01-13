@@ -160,9 +160,15 @@ Widget _buildImage(BuildContext context, ThemeData themeData,
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(300),
-          child: CircleAvatar(
-            radius: 50.r,
-            backgroundColor: themeData.dialogBackgroundColor,
+          child: Container(
+            // radius: 50.r,
+            width: 100.r,
+            height: 100.r,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: themeData.dialogBackgroundColor,
+            ),
+            clipBehavior: Clip.antiAlias,
             child: state.profileImagePath.isEmpty
                 ? user?.photoURL == null
                     ? Icon(
