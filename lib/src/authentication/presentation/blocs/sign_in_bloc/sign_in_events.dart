@@ -21,4 +21,6 @@ class SignInTogglePasswordVisibility extends SignInEvent {
 
 class SignInSubmittedEvent extends SignInEvent {}
 
+class SignOutSubmittedEvent extends SignInEvent {}
+
 class ResetSignInStateEvent extends SignInEvent {}

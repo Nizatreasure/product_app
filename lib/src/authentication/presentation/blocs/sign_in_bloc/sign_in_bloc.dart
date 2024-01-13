@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:product_app/core/common/widgets/custom_loader.dart';
 import 'package:product_app/src/authentication/domain/usecases/sign_in_usecase.dart';
+import 'package:product_app/src/authentication/domain/usecases/sign_out_usecase.dart';
 
 import '../../../../../core/common/form_submission/form_submission.dart';
 
@@ -11,13 +12,16 @@ part 'sign_in_state.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
   final SignInUseCase _signInUseCase;
+  final SignOutUseCase _signOutUseCase;
 
-  SignInBloc(this._signInUseCase) : super(const SignInState()) {
+  SignInBloc(this._signInUseCase, this._signOutUseCase)
+      : super(const SignInState()) {
     on<SignInEmailChangedEvent>(_emailChangedEventHandler);
     on<SignInPasswordChangedEvent>(_passwordChangedEventHandler);
     on<SignInTogglePasswordVisibility>(_passwordVisibilityChangedEventHandler);
     on<SignInSubmittedEvent>(_signInEventHandler);
     on<ResetSignInStateEvent>(_resetStateEventHandler);
+    on<SignOutSubmittedEvent>(_signOutEventHandler);
   }
 
   void _resetStateEventHandler(
@@ -62,5 +66,10 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
           formSubmissionStatus: SubmissionFailure(dataState.left)));
     }
     emit(state.copyWith(formSubmissionStatus: const InitialFormStatus()));
+  }
+
+  void _signOutEventHandler(
+      SignOutSubmittedEvent event, Emitter<SignInState> emit) async {
+    await _signOutUseCase.execute(params: null);
   }
 }

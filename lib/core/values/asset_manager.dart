@@ -15,4 +15,7 @@ class AppAssetManager {
   static const String starFill = '$_svgPath/star-fill.svg';
   static const String starEmpty = '$_svgPath/star-empty.svg';
   static const String starHalf = '$_svgPath/star-half.svg';
+  static const String location = '$_svgPath/location.svg';
+  static const String settings = '$_svgPath/settings.svg';
+  static const String arrowForward = '$_svgPath/arrow-forward.svg';
 }

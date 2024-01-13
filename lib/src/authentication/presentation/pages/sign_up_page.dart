@@ -12,7 +12,6 @@ import 'package:product_app/core/common/widgets/custom_text_input_field.dart';
 import 'package:product_app/core/routes/route_names.dart';
 import 'package:product_app/core/values/fontsize_manager.dart';
 import 'package:product_app/core/values/string_manager.dart';
-import 'package:product_app/di.dart';
 import 'package:product_app/src/authentication/presentation/blocs/sign_up_bloc/sign_up_bloc.dart';
 
 part '../widgets/sign_up_widgets.dart';
@@ -26,45 +25,44 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   @override
+  void initState() {
+    context.read<SignUpBloc>().add(ResetSignUpStateEvent());
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     ThemeData themeData = Theme.of(context);
-    return BlocProvider<SignUpBloc>(
-      create: (context) => getIt(),
-      child: Scaffold(
-        // appBar: AppBar(
-        //   leading: const CustomBackButton(),
-        //   backgroundColor: themeData.scaffoldBackgroundColor,
-        // ),
-        body: SafeArea(
-          bottom: false,
-          child: Builder(builder: (context) {
-            return BlocListener<SignUpBloc, SignUpState>(
-                listener: (context, state) async {
-                  if (state.formSubmissionStatus is SubmissionFailure) {
-                    showCustomDialog(
-                      context,
-                      title: StringManager.error,
-                      confirmButtonText: StringManager.close,
-                      body: (state.formSubmissionStatus as SubmissionFailure)
-                          .exception
-                          .message!,
-                    );
-                  } else if (state.formSubmissionStatus is SubmissionSuccess) {
-                    await showCustomDialog(
-                      context,
-                      title: StringManager.successful,
-                      body: StringManager.signUpSuccessful,
-                      confirmButtonText: StringManager.continue_,
-                      canPop: false,
-                    );
-                    if (context.mounted) {
-                      context.pushNamed(RouteNames.landing);
-                    }
+    return Scaffold(
+      body: SafeArea(
+        bottom: false,
+        child: Builder(builder: (context) {
+          return BlocListener<SignUpBloc, SignUpState>(
+              listener: (context, state) async {
+                if (state.formSubmissionStatus is SubmissionFailure) {
+                  showCustomDialog(
+                    context,
+                    title: StringManager.error,
+                    confirmButtonText: StringManager.close,
+                    body: (state.formSubmissionStatus as SubmissionFailure)
+                        .exception
+                        .message!,
+                  );
+                } else if (state.formSubmissionStatus is SubmissionSuccess) {
+                  await showCustomDialog(
+                    context,
+                    title: StringManager.successful,
+                    body: StringManager.signUpSuccessful,
+                    confirmButtonText: StringManager.continue_,
+                    canPop: false,
+                  );
+                  if (context.mounted) {
+                    context.pushNamed(RouteNames.landing);
                   }
-                },
-                child: _buildBody(themeData, context));
-          }),
-        ),
+                }
+              },
+              child: _buildBody(themeData, context));
+        }),
       ),
     );
   }

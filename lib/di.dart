@@ -56,7 +56,7 @@ Future<void> initializaDependencies() async {
 
   //blocs
   getIt.registerFactory<SignUpBloc>(() => SignUpBloc(getIt()));
-  getIt.registerFactory<SignInBloc>(() => SignInBloc(getIt()));
+  getIt.registerFactory<SignInBloc>(() => SignInBloc(getIt(), getIt()));
   getIt.registerFactory<LandingBloc>(() => LandingBloc());
   getIt.registerFactory<ProductListBloc>(() => ProductListBloc(getIt()));
   getIt.registerFactory<ProductDetailBloc>(() => ProductDetailBloc(getIt()));

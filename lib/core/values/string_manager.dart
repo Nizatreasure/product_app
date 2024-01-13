@@ -40,5 +40,15 @@ class StringManager {
       'Fashionable & Soft & Comfortable & Breathable';
   static const String specification7 = 'Machine/Hands washable';
   static const String reviews = 'Reviews';
+  static const String myProfile = 'My Profile';
+  static const String accountInfo = 'Account Info';
+  static const String myLocation = 'My Location';
+  static const String myOrders = 'My Orders';
+  static const String settings = 'Settings';
+  static const String signOut = 'Sign Out';
+  static const String yes = 'Yes';
+  static const String no = 'No';
+  static const String logout = 'Logout';
+  static const String logoutConfirmation = 'Are you sure you want to log out?';
   // static const String forgotPassword = '';
 }

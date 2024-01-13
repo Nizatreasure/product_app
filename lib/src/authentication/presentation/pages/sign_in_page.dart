@@ -12,7 +12,6 @@ import 'package:product_app/core/common/widgets/custom_text_input_field.dart';
 import 'package:product_app/core/routes/route_names.dart';
 import 'package:product_app/core/values/fontsize_manager.dart';
 import 'package:product_app/core/values/string_manager.dart';
-import 'package:product_app/di.dart';
 
 import '../blocs/sign_in_bloc/sign_in_bloc.dart';
 
@@ -27,34 +26,37 @@ class SignInPage extends StatefulWidget {
 
 class _SignInPageState extends State<SignInPage> {
   @override
+  void initState() {
+    context.read<SignInBloc>().add(ResetSignInStateEvent());
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     ThemeData themeData = Theme.of(context);
-    return BlocProvider<SignInBloc>(
-      create: (context) => getIt(),
-      child: Scaffold(
-        body: SafeArea(
-          bottom: false,
-          child: Builder(
-            builder: (context) {
-              return BlocListener<SignInBloc, SignInState>(
-                listener: (context, state) {
-                  if (state.formSubmissionStatus is SubmissionFailure) {
-                    showCustomDialog(
-                      context,
-                      title: StringManager.error,
-                      confirmButtonText: StringManager.close,
-                      body: (state.formSubmissionStatus as SubmissionFailure)
-                          .exception
-                          .message!,
-                    );
-                  } else if (state.formSubmissionStatus is SubmissionSuccess) {
-                    context.pushNamed(RouteNames.landing);
-                  }
-                },
-                child: _buildBody(themeData, context),
-              );
-            },
-          ),
+    return Scaffold(
+      body: SafeArea(
+        bottom: false,
+        child: Builder(
+          builder: (context) {
+            return BlocListener<SignInBloc, SignInState>(
+              listener: (context, state) {
+                if (state.formSubmissionStatus is SubmissionFailure) {
+                  showCustomDialog(
+                    context,
+                    title: StringManager.error,
+                    confirmButtonText: StringManager.close,
+                    body: (state.formSubmissionStatus as SubmissionFailure)
+                        .exception
+                        .message!,
+                  );
+                } else if (state.formSubmissionStatus is SubmissionSuccess) {
+                  context.pushNamed(RouteNames.landing);
+                }
+              },
+              child: _buildBody(themeData, context),
+            );
+          },
         ),
       ),
     );
