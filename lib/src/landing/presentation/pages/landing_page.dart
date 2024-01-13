@@ -17,14 +17,11 @@ class LandingPage extends StatefulWidget {
   State<LandingPage> createState() => _LandingPageState();
 }
 
-class _LandingPageState extends State<LandingPage> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
+class _LandingPageState extends State<LandingPage>
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     ThemeData themeData = Theme.of(context);
     return BlocProvider<LandingBloc>(
       create: (context) => getIt(),
@@ -52,4 +49,7 @@ class _LandingPageState extends State<LandingPage> {
       },
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
@@ -10,9 +11,13 @@ import 'package:product_app/core/values/fontsize_manager.dart';
 import 'package:product_app/src/home/data/models/product_model.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../blocs/product_list_bloc/product_list_bloc.dart';
+
 class ProductItem extends StatelessWidget {
   final ProductModel? productModel;
-  const ProductItem({super.key, this.productModel});
+  final bool showFavouriteButton;
+  const ProductItem(
+      {super.key, this.productModel, this.showFavouriteButton = false});
 
   @override
   Widget build(BuildContext context) {
@@ -79,10 +84,10 @@ class ProductItem extends StatelessWidget {
             SizedBox(width: 20.w),
             Expanded(
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 12.h, 12.w, 12.h),
+                padding: EdgeInsetsDirectional.fromSTEB(0, 12.h, 12.w, 1.h),
                 child: productModel == null
                     ? _buildShimmer()
-                    : _buildProdutDisplay(themeData),
+                    : _buildProductDisplay(themeData),
               ),
             ),
           ],
@@ -98,7 +103,7 @@ class ProductItem extends StatelessWidget {
         : Hero(tag: productModel.image, child: child);
   }
 
-  Widget _buildProdutDisplay(ThemeData themeData) {
+  Widget _buildProductDisplay(ThemeData themeData) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -119,23 +124,46 @@ class ProductItem extends StatelessWidget {
         ),
         SizedBox(height: 8.h),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('\$ ${productModel!.price}',
                 style: themeData.textTheme.bodyMedium!),
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  SvgPicture.asset(AppAssetManager.star,
-                      width: 18.r, height: 15.r),
-                  SizedBox(width: 3.w),
-                  Text(
-                    '${productModel?.rating.rate}',
-                    style: themeData.textTheme.bodyMedium!,
-                  )
-                ],
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                SvgPicture.asset(AppAssetManager.star,
+                    width: 18.r, height: 15.r),
+                SizedBox(width: 3.w),
+                Text(
+                  '${productModel?.rating.rate}',
+                  style: themeData.textTheme.bodyMedium!,
+                )
+              ],
             ),
+            if (showFavouriteButton)
+              BlocBuilder<ProductListBloc, ProductListState>(
+                  builder: (context, pState) {
+                return GestureDetector(
+                  onTap: () {
+                    context
+                        .read<ProductListBloc>()
+                        .add(ProductListSetFavouritesEvent(productModel!.id));
+                  },
+                  child: pState.favouriteIds.contains(productModel!.id)
+                      ? Image.asset(
+                          AppAssetManager.favouriteFill,
+                          width: 22.r,
+                          height: 22.r,
+                        )
+                      : SvgPicture.asset(
+                          AppAssetManager.favourite,
+                          width: 22.r,
+                          height: 22.r,
+                          colorFilter: ColorFilter.mode(
+                              themeData.canvasColor, BlendMode.srcIn),
+                        ),
+                );
+              }),
           ],
         )
       ],

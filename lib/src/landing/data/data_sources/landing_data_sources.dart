@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:product_app/core/values/asset_manager.dart';
 import 'package:product_app/core/values/string_manager.dart';
+import 'package:product_app/src/favourites/presentation/pages/favourite_page.dart';
 import 'package:product_app/src/home/presentation/pages/home_page.dart';
 import 'package:product_app/src/profile/presentation/pages/profile_page.dart';
 
@@ -20,7 +21,7 @@ class LandingLocalDataSource {
         ),
         LandingPageModel(
           assetName: AppAssetManager.favourite,
-          widget: Container(),
+          widget: const FavouritePage(),
           displayText: StringManager.favourites,
         ),
         LandingPageModel(

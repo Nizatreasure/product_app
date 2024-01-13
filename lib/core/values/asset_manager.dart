@@ -25,4 +25,5 @@ class AppAssetManager {
   static const String sync = '$_svgPath/sync.svg';
   static const String upload = '$_svgPath/upload.svg';
   static const String camera = '$_svgPath/camera.svg';
+  static const String favouriteEmpty = '$_svgPath/favourite-empty.svg';
 }

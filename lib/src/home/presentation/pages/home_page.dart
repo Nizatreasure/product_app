@@ -16,7 +16,8 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>
+    with AutomaticKeepAliveClientMixin {
   @override
   void initState() {
     context.read<ProductListBloc>().add(ProductListGetProductsEvent());
@@ -25,6 +26,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       appBar: customAppBar(
         context,
@@ -45,6 +47,7 @@ class _HomePageState extends State<HomePage> {
                   state: state,
                   child: ListView.builder(
                     itemCount: state.products?.length,
+                    key: const PageStorageKey('product-list'),
                     padding:
                         EdgeInsetsDirectional.fromSTEB(20.w, 12.h, 20.w, 10.h),
                     itemBuilder: (_, index) {
@@ -77,4 +80,7 @@ class _HomePageState extends State<HomePage> {
           )
         : child;
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

@@ -66,5 +66,9 @@ class StringManager {
   static const String takeAPicture = 'Take a picture';
   static const String cameraNotFound = 'Camera not found';
   static const String uploadImage = 'Upload Image';
+  static const String noFavourite = 'No favourites';
+  static const String favouriteAdd =
+      'You can add to your favourite from the product details page and they will appear here';
+  // static const String forgotPassword = '';
   // static const String forgotPassword = '';
 }
