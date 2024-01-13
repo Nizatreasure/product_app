@@ -24,3 +24,5 @@ enum DataStatus {
   invalidCredential,
   tooManyRequests,
 }
+
+enum CameraError { permission, other, none }

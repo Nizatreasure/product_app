@@ -61,5 +61,7 @@ class StringManager {
       'Your profile information has been successfully updated';
   static const String changedEmailMessage =
       'A verification link has been sent to your new email address. Please follow the link to verify you email and log in with your new email';
+  static const String couldNotLaunchCamera = 'Could not launch camera';
+  // static const String forgotPassword = '';
   // static const String forgotPassword = '';
 }

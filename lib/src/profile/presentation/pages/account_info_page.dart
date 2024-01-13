@@ -1,14 +1,17 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:product_app/core/common/form_submission/form_submission.dart';
 import 'package:product_app/core/common/widgets/custom_app_bar.dart';
 import 'package:product_app/core/common/widgets/custom_button.dart';
 import 'package:product_app/core/common/widgets/custom_dialog.dart';
 import 'package:product_app/core/common/widgets/custom_text_input_field.dart';
+import 'package:product_app/core/values/asset_manager.dart';
 import 'package:product_app/core/values/fontsize_manager.dart';
 import 'package:product_app/core/values/string_manager.dart';
 import 'package:product_app/di.dart';
@@ -92,7 +95,32 @@ class _AccountInfoPageState extends State<AccountInfoPage> {
         child: Column(
           children: [
             SizedBox(height: 15.h),
-            CircleAvatar(radius: 50.r),
+            Stack(
+              children: [
+                CircleAvatar(
+                  radius: 50.r,
+                  backgroundColor: themeData.dialogBackgroundColor,
+                  child: user?.photoURL == null
+                      ? Icon(
+                          Icons.person_3,
+                          size: 60,
+                          color: themeData.canvasColor,
+                        )
+                      : CachedNetworkImage(
+                          imageUrl: user!.photoURL!,
+                        ),
+                ),
+                PositionedDirectional(
+                  end: 10.w,
+                  bottom: 3.h,
+                  child: SvgPicture.asset(
+                    AppAssetManager.edit,
+                    width: 24.r,
+                    height: 24.r,
+                  ),
+                )
+              ],
+            ),
             SizedBox(height: 13.h),
             Text(
               user?.displayName ?? StringManager.unknown,

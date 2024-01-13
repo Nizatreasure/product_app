@@ -1,6 +1,9 @@
 class AppAssetManager {
-  // static const String _imagePath = 'assets/images';
+  static const String _imagePath = 'assets/images';
   static const String _svgPath = 'assets/svg';
+
+  //images
+  static const String voicePlay = '$_imagePath/voice_play.png';
 
   //svg
   static const String eyeOpen = '$_svgPath/eye-open.svg';
@@ -18,4 +21,6 @@ class AppAssetManager {
   static const String location = '$_svgPath/location.svg';
   static const String settings = '$_svgPath/settings.svg';
   static const String arrowForward = '$_svgPath/arrow-forward.svg';
+  static const String edit = '$_svgPath/edit.svg';
+  static const String sync = '$_svgPath/sync.svg';
 }
