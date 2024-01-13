@@ -1,4 +1,8 @@
+import 'package:product_app/core/values/asset_manager.dart';
+import 'package:product_app/core/values/string_manager.dart';
 import 'package:product_app/src/home/data/models/comment_model.dart';
+
+import '../models/category_model.dart';
 
 class ProductLocalDateSource {
   static List<CommentModel> comments = [
@@ -42,5 +46,20 @@ class ProductLocalDateSource {
       commenter: 'Zod',
       date: DateTime.now().subtract(const Duration(seconds: 46)),
     ),
+  ];
+
+  static const List<CategoryModel> categories = [
+    CategoryModel(
+        imagePath: AppAssetManager.electronics,
+        categoryName: StringManager.electronics),
+    CategoryModel(
+        imagePath: AppAssetManager.jewelry,
+        categoryName: StringManager.jewelry),
+    CategoryModel(
+        imagePath: AppAssetManager.mensClothing,
+        categoryName: StringManager.mensClothing),
+    CategoryModel(
+        imagePath: AppAssetManager.womensClothing,
+        categoryName: StringManager.womensClothing),
   ];
 }

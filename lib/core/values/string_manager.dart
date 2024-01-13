@@ -69,6 +69,9 @@ class StringManager {
   static const String noFavourite = 'No favourites';
   static const String favouriteAdd =
       'You can add to your favourite from the product details page and they will appear here';
-  // static const String forgotPassword = '';
-  // static const String forgotPassword = '';
+  static const String category = 'Category';
+  static const String electronics = 'Electronics';
+  static const String jewelry = 'Jewelry';
+  static const String mensClothing = 'Men\'s';
+  static const String womensClothing = 'Women\'s';
 }

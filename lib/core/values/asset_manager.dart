@@ -5,6 +5,10 @@ class AppAssetManager {
   //images
   static const String voicePlay = '$_imagePath/voice_play.png';
   static const String favouriteFill = '$_imagePath/favourite-fill.png';
+  static const String jewelry = '$_imagePath/jewelry.jpg';
+  static const String mensClothing = '$_imagePath/mens-clothing.jpg';
+  static const String womensClothing = '$_imagePath/womens-clothing.jpg';
+  static const String electronics = '$_imagePath/electronics.jpg';
 
   //svg
   static const String eyeOpen = '$_svgPath/eye-open.svg';

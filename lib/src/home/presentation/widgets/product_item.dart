@@ -100,7 +100,7 @@ class ProductItem extends StatelessWidget {
       {required ProductModel? productModel, required Widget child}) {
     return productModel == null
         ? child
-        : Hero(tag: productModel.image, child: child);
+        : Hero(tag: productModel.id, child: child);
   }
 
   Widget _buildProductDisplay(ThemeData themeData) {

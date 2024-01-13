@@ -2,7 +2,7 @@ part of '../pages/product_details_page.dart';
 
 Widget _buildImage(ThemeData themeData, ProductDetailState state) {
   return Hero(
-    tag: state.productDetails!.image,
+    tag: state.productDetails!.id,
     child: Container(
       height: 193.h,
       width: double.infinity,
