@@ -42,9 +42,10 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     final dataState = await _getFavouritesUseCase.execute(params: null);
     if (dataState.isRight) {
       emit(state.copyWith(
-          favouriteIds: ((dataState.right.data() as Map)['id'] as List<dynamic>)
-              .map((e) => int.parse(e.toString()))
-              .toList()));
+          favouriteIds:
+              ((dataState.right.data() as Map?)?['id'] as List<dynamic>?)
+                  ?.map((e) => int.parse(e.toString()))
+                  .toList()));
     } else {
       await Future.delayed(const Duration(seconds: 3));
       add(ProductListGetFavouritesEvent());
